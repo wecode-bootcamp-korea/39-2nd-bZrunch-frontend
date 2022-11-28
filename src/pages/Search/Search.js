@@ -1,9 +1,8 @@
-import React from "react";
-import styled from "styled-components";
-import variables from "../../styles/variables";
+import React from 'react';
+import styled from 'styled-components';
 
 const Search = () => {
-    return <p>hello</p>
-}
+  return <p>hello</p>;
+};
 
 export default Search;
