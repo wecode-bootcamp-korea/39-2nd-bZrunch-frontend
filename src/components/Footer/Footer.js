@@ -14,17 +14,17 @@ const Footer = () => {
           </LeftArea>
           <MiddleWrapper1>
             {LEFT_LI_DATA.map(item => {
-              return <MiddleLi>{item.title}</MiddleLi>;
+              return <MiddleLi key={item.id}>{item.title}</MiddleLi>;
             })}
           </MiddleWrapper1>
           <MiddleWrapper2>
             {MIDDLE_LI.map(sample => {
-              return <MiddleLi>{sample.title}</MiddleLi>;
+              return <MiddleLi key={sample.id}>{sample.title}</MiddleLi>;
             })}
           </MiddleWrapper2>
           <RightWrapper>
             {RIGHT_LI.map(data => {
-              return <RightLi>{data.title}</RightLi>;
+              return <RightLi key={data.id}>{data.title}</RightLi>;
             })}
           </RightWrapper>
         </WrapInfo>
