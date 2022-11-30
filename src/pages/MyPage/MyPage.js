@@ -1,38 +1,132 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
 import FourArticleBox from './FourArticleBox/FourArticleBox';
 
 const MyPage = () => {
+  const [myInfo, setMyInfo] = useState([]);
+  const [myLikes, setMyLikes] = useState([]);
+  const [myWritings, setMyWritings] = useState([]);
+  const [myPurchase, setMyPurchase] = useState([]);
+  // const data = [myLikes, myWritings, myPurchase];
+  const [searchParams, setSearchParams] = useSearchParams();
+  const limit = searchParams.get('limit');
+
+  // 'http://10.58.52.229:3000/mypage/mylikes'
+
+  // useEffect(() => {
+  //   fetch('/data/Article.json')
+  //     .then(response => response.json())
+  //     .then(result => {
+  //       setMyInfo(result);
+  //     });
+  // }, []);
+
+  useEffect(() => {
+    fetch('http://10.58.52.136:3000/mypage', {
+      method: 'POST',
+      headers: {
+        'content-Type': 'application/json;charset=utf-8',
+      },
+      body: JSON.stringify({
+        id: 1,
+      }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        setMyInfo(data.result[0]);
+      });
+  }, []);
+
+  useEffect(() => {
+    fetch('http://10.58.52.136:3000/mypage/mylikes', {
+      method: 'POST',
+      headers: {
+        'content-Type': 'application/json;charset=utf-8',
+      },
+      body: JSON.stringify({
+        id: 1,
+      }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        setMyLikes(data.result);
+      });
+  }, []);
+  console.log(myLikes);
+  useEffect(() => {
+    fetch('http://10.58.52.136:3000/mypage/mywritings', {
+      method: 'POST',
+      headers: {
+        'content-Type': 'application/json;charset=utf-8',
+      },
+      body: JSON.stringify({
+        id: 1,
+      }),
+    })
+      .then(response => response.json())
+      .then(result => {
+        setMyWritings(result.result);
+      });
+  }, []);
+
+  // useEffect(() => {
+  //   fetch('http://10.58.52.136:3000/mypage/mypurchase', {
+  //     method: 'POST',
+  //     headers: {
+  //       'content-Type': 'application/json;charset=utf-8',
+  //     },
+  //     body: JSON.stringify({
+  //       id: 1,
+  //     }),
+  //   })
+  //     .then(response => response.json())
+  //     .then(result => {
+  //       setMyPurchase(result.result);
+  //     });
+  // }, []);
+
   return (
     <Mypage>
       <Header>
-        <Profile src="/images/background.jpg" />
+        <Profile src={myInfo.profile_image} />
       </Header>
       <Main>
         <Contents>
-          <Name>유자</Name>
-          <Text>유자의 브런치입니다.</Text>
+          <Name>{myInfo.name}</Name>
+          <Text>{myInfo.description}</Text>
           <Container>
-            <Followwrap>
-              <Follow>구독자</Follow>
-              <Follow>관심작가</Follow>
-              <FollowNum>0</FollowNum>
-              <FollowNum>1</FollowNum>
-            </Followwrap>
-            <Button>글쓰기</Button>
+            <FollowAll>
+              <Followwrap to="/">
+                <Follow>구독자</Follow>
+                <FollowNum>{myInfo.구독자}</FollowNum>
+              </Followwrap>
+              <Followwrap to="/">
+                <Follow>관심작가</Follow>
+                <FollowNum>{myInfo.관심작가}</FollowNum>
+              </Followwrap>
+            </FollowAll>
+            <LinkBtn to="/write">
+              <Button>글쓰기</Button>
+            </LinkBtn>
           </Container>
-          <Likes to="/">
-            <SubTitle>좋아요 한 글 ></SubTitle>
-          </Likes>
           <ArticleBoxWrap>
-            <FourArticleBox />
+            <LinkBtn to="/mywritings">
+              <FourArticleBox title="내가 쓴 글 〉" data={myWritings} />
+            </LinkBtn>
+            {/* <LinkBtn>
+              <FourArticleBox title="구매한 글 〉" data={myPurchase} />
+            </LinkBtn> */}
+            <LinkBtn>
+              <FourArticleBox title="좋아요 한 글 〉" data={myLikes} />
+            </LinkBtn>
           </ArticleBoxWrap>
         </Contents>
       </Main>
     </Mypage>
   );
 };
+
 const Header = styled.header`
   background-color: ${props => props.theme.theme.gray};
   height: 300px;
@@ -90,11 +184,17 @@ const FollowNum = styled.div`
   font-size: 20px;
 `;
 
-const Followwrap = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  margin: 15px 0;
-  width: 170px;
+const Followwrap = styled(Link)`
+  margin: 15px 0 25px;
+  width: 80px;
+  text-decoration: none;
+`;
+
+const FollowAll = styled.div`
+  display: flex;
+`;
+const LinkBtn = styled(Link)`
+  text-decoration: none;
 `;
 
 const Button = styled.button`
@@ -104,19 +204,11 @@ const Button = styled.button`
   color: ${props => props.theme.theme.mint};
   border: 1px solid ${props => props.theme.theme.mint};
   background-color: white;
+  cursor: pointer;
 `;
 
-const SubTitle = styled.div`
-  font-size: 14px;
-  text-decoration: none;
-  color: black;
-  margin-top: 30px;
+const ArticleBoxWrap = styled.div`
+  margin-top: 10px;
 `;
-
-const Likes = styled(Link)`
-  text-decoration: none;
-`;
-
-const ArticleBoxWrap = styled.div``;
 
 export default MyPage;
