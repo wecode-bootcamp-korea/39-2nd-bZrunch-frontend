@@ -1,27 +1,45 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 function ArticleBox({ data }) {
+  const style = {
+    backgroundColor: data.color,
+  };
   return (
     <Articlebox>
-      <Content>
+      <Content to={`/article/${data.id}`}>
         <Title>{data.title}</Title>
-        <Description>{data.description}</Description>
-        <Description>by {data.writer}</Description>
+        <Description>{data.content}</Description>
+        <Description>by {data.authors}</Description>
       </Content>
-      <Image alt="later" />
+      {data.color ? (
+        <Color style={style} />
+      ) : (
+        <Image src={data.header_image} alt="later" />
+      )}
     </Articlebox>
   );
 }
+
+const Color = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+`;
 
 const Articlebox = styled.div`
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid #eeeeef;
   margin: 20px 30px 0 0;
+  padding: 0 20px 20px;
 `;
 
-const Content = styled.div``;
+const Content = styled(Link)`
+  color: black;
+  text-decoration: none;
+`;
 
 const Title = styled.div`
   font-size: 17px;
@@ -36,8 +54,9 @@ const Description = styled.div`
 `;
 
 const Image = styled.img`
-  width: 50px;
-  height: 50px;
+  width: 100px;
+  height: 100px;
+  margin: ;
 `;
 
 export default ArticleBox;
