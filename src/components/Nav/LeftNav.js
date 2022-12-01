@@ -1,8 +1,12 @@
 import React, { useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const LeftNav = ({ isOpen, handleBtn }) => {
   const sideRef = useRef(null);
+  const token = localStorage.getItem('token');
+  const name = localStorage.getItem('name');
+  const profile_image = localStorage.getItem('profile_image');
 
   const clickOutside = e => {
     if (isOpen && !sideRef.current.contains(e.target)) {
@@ -20,31 +24,53 @@ const LeftNav = ({ isOpen, handleBtn }) => {
   return (
     <Aside isOpen={isOpen} ref={sideRef}>
       <Header>
-        <Logo>bZrunch</Logo>
-        <Text>
-          <Saying>You can make anything by writing</Saying>
-          <Author>-C.S.Lewis-</Author>
-        </Text>
-        <Login>브Z런치 시작하기</Login>
+        {token ? (
+          <>
+            <ProfileImg src={profile_image} />
+            <NameTitle>
+              <Name>{name}</Name>
+              <NameWriter>작가님</NameWriter>
+            </NameTitle>
+            <LoginLink to="/write">글쓰기</LoginLink>
+          </>
+        ) : (
+          <>
+            <Logo to="/">bZrunch</Logo>
+            <Text>
+              <Saying>You can make anything by writing</Saying>
+              <Author>-C.S.Lewis-</Author>
+            </Text>
+            <LoginLink to="/login">브Z런치 시작하기</LoginLink>
+          </>
+        )}
       </Header>
       <Main>
-        <Home>브Z런치 홈</Home>
-        <Now>브Z런치 나우</Now>
-        <MyPage>브Z런치 페이지</MyPage>
+        <HomeLink to="/">브Z런치 홈</HomeLink>
+        <NowLink to="/articleList">브Z런치 나우</NowLink>
+        {token ? (
+          <>
+            <MyPageLink to="/myPage">마이 페이지</MyPageLink>
+            <CartLink to="/cart">장바구니</CartLink>
+            <LogoutBtn>로그아웃</LogoutBtn>
+          </>
+        ) : (
+          <Forget>계정을 잊어버리셨나요?</Forget>
+        )}
       </Main>
-      <Forget>계정을 잊어버리셨나요?</Forget>
     </Aside>
   );
 };
 
 const Aside = styled.div`
   position: fixed;
+  top: 0;
   width: 250px;
   height: 100%;
   left: ${props => (props.isOpen ? 0 : '-250px')};
-  border: 1px solid ${props => props.theme.theme.gray};
+  border: 1px solid ${props => props.theme.theme.darkGray};
+  background-color: white;
   transition: 0.5s ease;
-  z-index: 1;
+  z-index: 10;
 `;
 
 const Header = styled.div`
@@ -52,13 +78,26 @@ const Header = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  border-bottom: 1px solid ${props => props.theme.theme.darkGray};
   background-color: ${props => props.theme.theme.gray};
 `;
 
-const Logo = styled.div`
+const ProfileImg = styled.img`
+  width: 70px;
+  height: 70px;
+  margin-top: 50px;
+  border-radius: 50%;
+`;
+
+const Logo = styled(Link)`
   padding-top: 50px;
   font-family: 'Caveat', cursive;
   font-size: 30px;
+  text-decoration: none;
+
+  &:visited {
+    color: inherit;
+  }
 `;
 
 const Text = styled.div`
@@ -66,6 +105,24 @@ const Text = styled.div`
   color: gray;
   font-family: 'Georgia', serif;
   text-align: center;
+`;
+
+const NameTitle = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 30px 0;
+  font-family: 'Noto Sans KR', sans-serif;
+`;
+
+const Name = styled.div`
+  margin-right: 5px;
+  font-weight: bold;
+  color: ${props => props.theme.theme.black};
+`;
+
+const NameWriter = styled.span`
+  color: ${props => props.theme.theme.dartGray};
+  font-size: 12px;
 `;
 
 const Saying = styled.div`
@@ -80,14 +137,15 @@ const Author = styled.div`
   font-size: 12px;
 `;
 
-const Login = styled.button`
-  margin-bottom: 40px;
-  padding: 5px 10px;
+const LoginLink = styled(Link)`
+  margin-bottom: 30px;
+  padding: 7px 10px;
   border: 1px solid ${props => props.theme.theme.mint};
   border-radius: 20px;
   background-color: white;
   color: ${props => props.theme.theme.mint};
-  font-size: 14px;
+  font-size: 12px;
+  text-decoration: none;
   cursor: pointer;
 `;
 
@@ -96,13 +154,21 @@ const Main = styled.div`
   flex-direction: column;
   align-items: center;
   margin: 40px 0;
+  background-color: white;
+  color: gray;
   font-family: 'Noto Sans KR', sans-serif;
   font-size: 15px;
   letter-spacing: -0.5px;
 `;
 
-const Home = styled.div`
+const HomeLink = styled(Link)`
   padding-bottom: 40px;
+  text-decoration: none;
+  color: gray;
+
+  &:visited {
+    color: inherit;
+  }
 
   &:hover {
     color: ${props => props.theme.theme.mint};
@@ -118,8 +184,14 @@ const Home = styled.div`
   }
 `;
 
-const Now = styled.div`
+const NowLink = styled(Link)`
   padding-bottom: 40px;
+  text-decoration: none;
+  color: gray;
+
+  &:visited {
+    color: inherit;
+  }
 
   &:hover {
     color: ${props => props.theme.theme.mint};
@@ -135,7 +207,15 @@ const Now = styled.div`
   }
 `;
 
-const MyPage = styled.div`
+const MyPageLink = styled(Link)`
+  padding-bottom: 40px;
+  text-decoration: none;
+  color: gray;
+
+  &:visited {
+    color: inherit;
+  }
+
   &:hover {
     color: ${props => props.theme.theme.mint};
     cursor: pointer;
@@ -148,6 +228,43 @@ const MyPage = styled.div`
   &:hover:after {
     content: '──';
   }
+`;
+
+const CartLink = styled(Link)`
+  text-decoration: none;
+  color: gray;
+
+  &:visited {
+    color: inherit;
+  }
+
+  &:hover {
+    color: ${props => props.theme.theme.mint};
+    cursor: pointer;
+  }
+
+  &:hover:before {
+    content: '──';
+  }
+
+  &:hover:after {
+    content: '──';
+  }
+`;
+
+const LogoutBtn = styled.button`
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  margin-bottom: 20px;
+  padding: 5px 10px;
+  border: 1px solid gray;
+  border-radius: 20px;
+  background-color: white;
+  color: gray;
+  font-size: 10px;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
 `;
 
 const Forget = styled.div`

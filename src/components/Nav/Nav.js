@@ -1,11 +1,15 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { RxHamburgerMenu } from 'react-icons/rx';
+import { AiOutlineSearch } from 'react-icons/ai';
 import LeftNav from './LeftNav';
 
 const Nav = () => {
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
+
+  const token = localStorage.getItem('token');
 
   const handleBtn = () => {
     setIsOpen(isOpen => !isOpen);
@@ -16,10 +20,19 @@ const Nav = () => {
       <LeftNav isOpen={isOpen} handleBtn={handleBtn} />
       <Icon>
         <HamburgerMenu onClick={handleBtn} />
-        <Brunch>bZrunch</Brunch>
+        <Brunch to="/">bZrunch</Brunch>
         <NavRight>
-          <Login>시작하기</Login>
-          <i className="fa-solid fa-magnifying-glass" />
+          {token ? (
+            <LoginLink to="/write">글쓰기</LoginLink>
+          ) : (
+            <LoginLink to="/login">시작하기</LoginLink>
+          )}
+
+          <SearchIcon
+            onClick={() => {
+              navigate('/search');
+            }}
+          />
         </NavRight>
       </Icon>
     </>
@@ -30,10 +43,13 @@ const Icon = styled.div`
   display: flex;
   align-items: center;
   position: fixed;
+  top: 0;
   width: 100%;
   height: 60px;
   padding-left: 20px;
   background-color: white;
+  opacity: 0.9;
+  z-index: 9;
 `;
 
 const HamburgerMenu = styled(RxHamburgerMenu)`
@@ -41,31 +57,46 @@ const HamburgerMenu = styled(RxHamburgerMenu)`
   cursor: pointer;
 `;
 
-const Brunch = styled.div`
+const Brunch = styled(Link)`
   display: inline;
   padding-left: 15px;
   font-family: 'Caveat', cursive;
   font-size: 25px;
+  text-decoration: none;
+
+  &:visited {
+    color: inherit;
+  }
 `;
 
-const Login = styled.button`
+const NavRight = styled.div`
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  padding-right: 20px;
+`;
+
+const LoginLink = styled(Link)`
   padding: 7px 10px;
   border: 1px solid ${props => props.theme.theme.lightGray};
   border-radius: 20px;
   background-color: transparent;
   color: ${props => props.theme.theme.lightGray};
   font-size: 10px;
+  text-decoration: none;
   cursor: pointer;
+
+  &:hover {
+    color: ${props => props.theme.theme.mint};
+    border-color: ${props => props.theme.theme.mint};
+  }
 `;
 
-const NavRight = styled.div`
-  margin-left: auto;
-  padding-right: 20px;
-
-  .fa-magnifying-glass {
-    padding-left: 15px;
-    cursor: pointer;
-  }
+const SearchIcon = styled(AiOutlineSearch)`
+  margin: 0 15px;
+  color: ${props => props.theme.theme.black};
+  font-size: 25px;
+  cursor: pointer;
 `;
 
 export default Nav;
