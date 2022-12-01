@@ -1,0 +1,44 @@
+[
+  {
+    "rectitle": "위코드 생활 뿌시기",
+    "reccontents": "위코드 생활을 한달 반째 뿌시고 있다. 다 뿌셨다..",
+    "recwriter": "유자",
+    "img_src": "/images/recommend/wecode.jpeg",
+    "id": 20
+  },
+  {
+    "rectitle": "오늘의 맛집 추천",
+    "reccontents": "키토멘에서 토메이토라면을 먹었다. 이상하게 중독성 있는 맛 언젠간 또 가지 않을까..",
+    "recwriter": "유자",
+    "img_src": "/images/recommend/food.jpeg",
+    "id": 21
+  },
+  {
+    "rectitle": "한국 vs. 포르투갈 오늘 밤 12시!!",
+    "reccontents": "오늘 집에 가면서 과자랑 맥주 사가야겠다. 12시에 월드컵 달려야지~ ",
+    "recwriter": "유자",
+    "img_src": "/images/recommend/olympic.jpeg",
+    "id": 22
+  },
+  {
+    "rectitle": "S3.. 그것은 무엇인가",
+    "reccontents": "쉽지않네...",
+    "recwriter": "유자",
+    "img_src": "/images/background.jpg",
+    "id": 23
+  },
+  {
+    "rectitle": "오늘의 마음의 소리",
+    "reccontents": "너무 매력적이여도 피곤해 ",
+    "recwriter": "유자",
+    "img_src": "/images/recommend/bana.jpeg",
+    "id": 24
+  },
+  {
+    "rectitle": "더이상 쓸말이 없다",
+    "reccontents": "으아아아아아아아아아아아앙아아아아",
+    "recwriter": "유자",
+    "img_src": "/images/recommend/nothing.jpeg",
+    "id": 25
+  }
+]

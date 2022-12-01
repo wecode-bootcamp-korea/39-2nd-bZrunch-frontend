@@ -75,8 +75,6 @@ const AllSlide = styled.div`
     opacity: 0.3;
   }
 
-
-
   .slick-prev {
     left: 10px;
     z-index: 10;

@@ -1,30 +1,244 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
+import { Link, useParams } from 'react-router-dom';
 
 const Article = () => {
+  //article 내용 가져오기
+  const [getArticle, setGetArticle] = useState({});
+  const { writing_id } = useParams();
+
+  useEffect(() => {
+    fetch(`http://10.58.52.137:3000/writings/${writing_id}`)
+      .then(response => response.json())
+      .then(result => setGetArticle(result.writing[0]));
+  }, [writing_id]);
+
+  const {
+    title,
+    writer,
+    content,
+    subscribers,
+    author_id,
+    likes,
+    id,
+    price,
+    header_image,
+    color,
+  } = getArticle;
+
+  //추천글 mockdata 내용 가져오기
+  const [getRecommend, setGetRecommend] = useState([]);
+
+  useEffect(() => {
+    fetch('/data/recommend.json')
+      .then(response => response.json())
+      .then(result => setGetRecommend(result));
+  }, []);
+
+  //작가 구독하기
+  const [isSubscribe, setIsSubscribe] = useState(false);
+  const handleSubscribe = () => {
+    setIsSubscribe(prev => !prev);
+    let copy = { ...getArticle };
+    if (isSubscribe) {
+      copy.subscribers = Number(subscribers) - 1;
+      setGetArticle(copy);
+    } else {
+      copy.subscribers = Number(subscribers) + 1;
+      setGetArticle(copy);
+    }
+  };
+
+  //구독하기 정보 BE로 전달
+  const subscribe = useEffect(() => {
+    fetch(`http://10.58.52.137:3000/likes/authors/${author_id}`, {
+      method: 'POST',
+      headers: {
+        'content-Type': 'application/json;charset=utf-8',
+        Authorization:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjEsImlhdCI6MTY3MDQ3NzA4MX0.h5WsYzvNeukqgZ8Xm60l-Jyai0gmQ-NFMn72BA2yZ9U',
+      },
+      body: JSON.stringify({
+        id: 1,
+      }),
+    }).then(response => response.json());
+  }, [isSubscribe, author_id]);
+
+  //글 좋아요
+  const [isActive, setIsActive] = useState(false);
+  const handleLike = () => {
+    setIsActive(prev => !prev);
+    let copy = { ...getArticle };
+    if (isActive) {
+      copy.likes = Number(likes) - 1;
+      setGetArticle(copy);
+    } else {
+      copy.likes = Number(likes) + 1;
+      setGetArticle(copy);
+    }
+  };
+
+  //글 좋아요 정보 BE로 전달
+  const likeArticle = useEffect(() => {
+    fetch(`http://10.58.52.137:3000/likes/writings/${id}`, {
+      method: 'POST',
+      headers: {
+        'content-Type': 'application/json;charset=utf-8',
+        Authorization:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjEsImlhdCI6MTY3MDQ3NzA4MX0.h5WsYzvNeukqgZ8Xm60l-Jyai0gmQ-NFMn72BA2yZ9U',
+      },
+      body: JSON.stringify({
+        id: 1,
+      }),
+    }).then(response => response.json());
+  }, [isActive, id]);
+
+  //장바구니로 데이터 보내기
+
+  const sendItem = () => {
+    fetch('http://10.58.52.136:3000/carts', {
+      method: 'POST',
+      headers: {
+        'content-Type': 'application/json;charset=utf-8',
+        Authorization:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjEsImlhdCI6MTY3MDQxMzU3OX0.uUWBNp7Lzw28y2nU-lZAJJ7p00RT24Y6eodTiw7jNBQ',
+      },
+      body: JSON.stringify({
+        writingId: id,
+      }),
+    })
+      .then(response => response.json())
+      .then(data => setGetArticle(data));
+  };
+
   return (
     <>
       <Header>
-        <Title>제목 고양이</Title> bnbn
+        {color ? <Color color={color} /> : <BackImg src={header_image} />}
+        <Title>{title}</Title>
         <Writer>
-          by 책공장
-          <Icon className="material-symbols-outlined">favorite</Icon>
+          by {writer}
+          {isActive ? (
+            <ClickedIcon
+              className="material-symbols-outlined"
+              onClick={(likeArticle, handleLike)}
+            >
+              favorite
+            </ClickedIcon>
+          ) : (
+            <Icon
+              className="material-symbols-outlined"
+              onClick={(likeArticle, handleLike)}
+            >
+              favorite
+            </Icon>
+          )}
+          <Likes>{likes}</Likes>
         </Writer>
       </Header>
-      <Body>
-        <BodyContents>내용이닥</BodyContents>
-      </Body>
+      {price === 0 ? (
+        <Body>
+          <BodyContents>{content}</BodyContents>
+        </Body>
+      ) : (
+        <Body>
+          <Purchase>구매 요청</Purchase>
+          <Buttonwrap>
+            <BuyLink to="/cart">
+              <BuyButton onclick={sendItem}>장바구니 담기</BuyButton>
+            </BuyLink>
+            <BuyLink to="/cart">
+              <BuyButton>결제하기</BuyButton>
+            </BuyLink>
+          </Buttonwrap>
+        </Body>
+      )}
       <Footer>
         <Contents>
-          유주
-          <Button>구독하기</Button>
-          <Follower>구독자 100</Follower>
+          {writer}
+          {isSubscribe ? (
+            <ClickedBtn onClick={(subscribe, handleSubscribe)}>
+              구독중
+            </ClickedBtn>
+          ) : (
+            <Button onClick={(subscribe, handleSubscribe)}>구독하기</Button>
+          )}
+          <Follower>구독자 {subscribers}</Follower>
         </Contents>
         <Profile src="/images/background.jpg" />
+        <Recommend>
+          {getRecommend.map(data => {
+            return (
+              <Box key={data.rectitle} to={`article/${data.id}`}>
+                <Thumbnail src={data.img_src} />
+                <RecTitle>{data.rectitle}</RecTitle>
+                <RecContents>{data.reccontents}</RecContents>
+                <RecContents>by {data.recwriter}</RecContents>
+              </Box>
+            );
+          })}
+        </Recommend>
       </Footer>
     </>
   );
 };
+const Color = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: ${({ color }) => color};
+`;
+
+const Purchase = styled.div`
+  text-align: center;
+  font-size: 24px;
+  line-height: 260px;
+`;
+
+const BackImg = styled.img`
+  width: 100%;
+`;
+
+const BuyLink = styled(Link)``;
+
+const Buttonwrap = styled.div`
+  text-align: center;
+`;
+
+const Thumbnail = styled.img`
+  width: 300px;
+  height: 200px;
+  object-fit: cover;
+`;
+
+const Box = styled(Link)`
+  width: 300px;
+  margin: 20px;
+  color: black;
+  text-decoration: none;
+`;
+
+const RecTitle = styled.h1`
+  width: 100%;
+  font-size: 25px;
+  font-weight: 300;
+  margin-top: 30px;
+`;
+
+const RecContents = styled.h1`
+  width: 100%;
+  font-size: 14px;
+  font-weight: 300;
+  margin-top: 15px;
+`;
+
+const Recommend = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  margin: 50px 80px;
+  justify-content: space-around;
+`;
 
 const Header = styled.header`
   border-bottom: 1px solid black;
@@ -33,34 +247,49 @@ const Header = styled.header`
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
-  padding: 20px 0;
 `;
 
 const Title = styled.h1`
+  font-family: 'Nanum Myeongjo', serif;
   font-size: 45px;
-  padding: 50px 0;
+  padding: 100px 0;
   width: 700px;
   position: fixed;
 `;
 
 const Writer = styled.p`
   font-size: 12px;
+  font-family: 'Nanum Myeongjo', serif;
+  font-weight: bolder;
   display: flex;
   align-items: center;
   width: 700px;
   position: fixed;
+  padding: 30px 0;
 `;
 
-const Icon = styled.span`
+const Icon = styled(AiOutlineHeart)`
   margin-left: 20px;
   font-size: 30px;
+  cursor: pointer;
 `;
 
+const ClickedIcon = styled(AiFillHeart)`
+  margin-left: 20px;
+  font-size: 30px;
+  cursor: pointer;
+  color: ${props => props.theme.theme.mint};
+`;
+
+const Likes = styled.span``;
+
 const BodyContents = styled.div`
-  margin: 0 auto;
+  font-family: 'Noto Sans KR', sans-serif;
+  margin: 30px auto;
   padding-top: 30px;
   width: 700px;
 `;
+
 const Body = styled.div`
   background-color: white;
   height: 500px;
@@ -71,8 +300,14 @@ const Body = styled.div`
 const Footer = styled.div`
   background-color: ${props => props.theme.theme.gray};
   position: relative;
-  height: 800px;
+  height: 1000px;
   padding-top: 20px;
+  @media only screen and (max-width: 1180px) {
+    height: 1300px;
+  }
+  @media only screen and (max-width: 840px) {
+    height: 2200px;
+  }
 `;
 
 const Profile = styled.img`
@@ -98,7 +333,31 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
+const BuyButton = styled.button`
+  width: 120px;
+  height: 45px;
+  border-radius: 22.5px;
+  margin: 0 20px;
+  color: ${props => props.theme.theme.mint};
+  border: 1px solid ${props => props.theme.theme.mint};
+  background-color: white;
+  cursor: pointer;
+`;
+
+const ClickedBtn = styled.button`
+  width: 80px;
+  height: 30px;
+  border-radius: 15px;
+  color: white;
+  border: 1px solid ${props => props.theme.theme.mint};
+  background-color: ${props => props.theme.theme.mint};
+  margin-left: 20px;
+  cursor: pointer;
+`;
+
 const Contents = styled.div`
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 28px;
   margin: 30px auto;
   width: 700px;
 `;

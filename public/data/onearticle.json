@@ -1,0 +1,16 @@
+{
+  "writing": [
+    {
+      "title": "고양이 강아지 뭐가 더 좋아",
+      "article_id": 120,
+      "writer": "유자",
+      "author_Id": 5,
+      "contents": "나는 강아지가 더 좋다. 고양이도 개냥이면 좋은데 도도한 고양이는 별루다. 왜냐면 못만지게 해서 재미없다. 강아지는 내가 열심히 괴롭혀도 좋아한다. 강아지... 키우고 싶다...",
+      "subscribers": 100,
+      "likes": 6,
+      "price": 0,
+      "header_image": "images/background.jpg",
+      "colors": "#ababab"
+    }
+  ]
+}
