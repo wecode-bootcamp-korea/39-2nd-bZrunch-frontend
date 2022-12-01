@@ -1,6 +1,7 @@
 import React from 'react';
 import Slide from './Slide';
 import styled from 'styled-components';
+import { KAKAO_AUTH_URI } from './KakaoOauth';
 
 const Login = () => {
   return (
@@ -9,7 +10,9 @@ const Login = () => {
       <LoginMain>
         <LoginTitle>bZrunch 시작하기</LoginTitle>
         <LoginBtn>
-          <i className="fa-solid fa-comment" /> 카카오계정으로 시작하기
+          <a href={KAKAO_AUTH_URI}>
+            <i className="fa-solid fa-comment" /> 카카오계정으로 시작하기
+          </a>
         </LoginBtn>
       </LoginMain>
     </LoginPage>
@@ -19,9 +22,11 @@ const Login = () => {
 const LoginPage = styled.div`
   display: flex;
   justify-content: space-around;
-  width: 60%;
-  height: 450px;
+  align-items: center;
+  width: 50%;
+  height: 100vh;
   margin: 0 auto;
+  top: 60px;
   color: black;
   font-family: 'Noto Sans KR', sans-serif;
   font-weight: bold;
@@ -31,7 +36,8 @@ const LoginMain = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 50%;
+  width: 50vw;
+  height: 50vh;
   border-radius: 10px;
   background-color: ${props => props.theme.theme.gray};
 `;
@@ -51,6 +57,11 @@ const LoginBtn = styled.div`
   background-color: #ffe500;
   text-align: center;
   cursor: pointer;
+
+  a {
+    text-decoration: none;
+    color: black;
+  }
 `;
 
 export default Login;

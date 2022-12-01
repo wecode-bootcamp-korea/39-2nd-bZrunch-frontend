@@ -47,7 +47,8 @@ const LoginSlide = styled.div`
   }
 
   .swiper-slide {
-    width: 40%;
+    width: 100px;
+    height: 45vh;
     background: #fff;
     font-size: 18px;
     text-align: center;
@@ -92,6 +93,15 @@ const LoginSlide = styled.div`
         --swiper-theme-color: dimgray;
       }
     }
+  }
+
+  .swiper-pagination {
+    position: absolute;
+    text-align: center;
+    transition: 0.3s opacity;
+    transform: translate3d(0, 0, 0);
+    z-index: 10;
+    bottom: 0;
   }
 `;
 
