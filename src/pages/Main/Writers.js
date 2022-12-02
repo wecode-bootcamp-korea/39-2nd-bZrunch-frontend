@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import TopBtn from '../../components/TopBtn/TopBtn';
 
 const Writers = props => {
   const { Keyword, KeywordTitle } = props;
@@ -14,8 +15,8 @@ const Writers = props => {
           return (
             <Writer key={writerdata.id}>
               <WriterImg
-                src={writerdata.Img}
-                alt={`${writerdata.title}님의 프로필이미지`}
+                src={writerdata.writerImg}
+                alt={`${writerdata.name}님의 프로필이미지`}
               />
               <WriterName>{writerdata.name}</WriterName>
               <WriterText>{writerdata.content}</WriterText>
@@ -27,12 +28,14 @@ const Writers = props => {
           );
         })}
       </WritersList>
+
+      <TopBtn />
     </SubSection>
   );
 };
 
 const SubSection = styled.div`
-  padding-bottom: 200px;
+  padding-bottom: 50px;
   background-color: #fafafa;
 `;
 
@@ -43,7 +46,8 @@ const WritersList = styled.div`
   gap: 50px 20px;
   justify-content: center;
   align-items: center;
-  width: 60%;
+  width: 50%;
+  padding-bottom: 100px;
   margin: 0 auto;
 `;
 
@@ -73,6 +77,7 @@ const WriterName = styled.strong`
 `;
 
 const WriterText = styled.div`
+  height: 100px;
   margin-top: 20px;
   font-family: 'Noto Sans KR', sans-serif;
   line-height: 30px;
@@ -94,23 +99,22 @@ const CategoryBtn = styled.button`
 const WRITER_DATAS = [
   {
     id: 1,
-    writerImg: 'images/kimboyoon/슬라이드이미지1.jpg',
+    writerImg: 'images/kimboyoon/김건우.png',
     name: '김건우',
-    content:
-      '안녕하세요. 프론트엔드 개발자 김보윤입니다.안녕하세요. 프론트엔드 개발자 김보윤입니다.',
+    content: '안녕하세요. 까탈스러운 판교 사는 냥반입니다.',
     category: '풀스택',
   },
   {
     id: 2,
-    writerImg: 'images/kimboyoon/슬라이드이미지1.jpg',
+    writerImg: 'images/kimboyoon/김보윤.jpg',
     name: '김보윤',
     content:
-      '안녕하세요. 프론트엔드 개발자 김보윤입니다.안녕하세요. 프론트엔드 개발자 김보윤입니다.',
+      '안녕하세요. 매일 성장하는 개발자, 김보윤입니다. 기록용으로 소소하게 글을 쓰고 있어요.',
     category: '프론트엔드',
   },
   {
     id: 3,
-    writerImg: 'images/kimboyoon/슬라이드이미지1.jpg',
+    writerImg: 'images/kimboyoon/이유주.jpeg',
     name: '이유주',
     content:
       '안녕하세요. 프론트엔드 개발자 김보윤입니다.안녕하세요. 프론트엔드 개발자 김보윤입니다.',
@@ -118,23 +122,23 @@ const WRITER_DATAS = [
   },
   {
     id: 4,
-    writerImg: 'images/kimboyoon/슬라이드이미지1.jpg',
+    writerImg: 'images/kimboyoon/오현상.jpg',
+    name: '오현상',
+    content: '먹은 만큼 성장하는 개발자 스토리텔러 입니다',
+    category: '벡엔드',
+  },
+  {
+    id: 5,
+    writerImg: 'images/kimboyoon/이동근.jpg',
     name: '이동근',
     content:
       '안녕하세요. 프론트엔드 개발자 김보윤입니다.안녕하세요. 프론트엔드 개발자 김보윤입니다.',
     category: '백엔드',
   },
   {
-    id: 5,
-    writerImg: 'images/kimboyoon/슬라이드이미지1.jpg',
-    name: '오현상',
-    content:
-      '안녕하세요. 프론트엔드 개발자 김보윤입니다.안녕하세요. 프론트엔드 개발자 김보윤입니다.',
-    category: '벡엔드',
-  },
-  {
     id: 6,
-    writerImg: 'images/kimboyoon/슬라이드이미지1.jpg',
+    writerImg:
+      'https://image.rocketpunch.com/company/99609/wecode_logo_1590553949.jpg?s=400x400&t=inside',
     name: '위코드',
     content:
       '안녕하세요. 프론트엔드 개발자 김보윤입니다.안녕하세요. 프론트엔드 개발자 김보윤입니다.',

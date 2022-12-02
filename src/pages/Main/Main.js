@@ -14,7 +14,7 @@ const Main = () => {
           <br />
           그리고 다시 꺼내 보세요.
           <br />
-          서랍 속 간직하고 있는 글과 감성을
+          서랍 속 간직하고 있는 글과 감성을.
         </Article>
       </Header>
       <MainSlide />
@@ -29,7 +29,7 @@ const Main = () => {
 };
 
 const Header = styled.header`
-  margin: 25px 0 0 25%;
+  margin: 60px 0 0 25%;
   font-family: 'Nanum Myeongjo', serif;
   font-size: 40px;
 `;
