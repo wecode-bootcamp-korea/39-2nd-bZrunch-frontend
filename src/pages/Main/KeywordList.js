@@ -1,12 +1,22 @@
 import React from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 const KeywordList = () => {
+  const navigate = useNavigate();
+  const param = useParams();
+
+  const goToCategory = () => {
+    navigate(`/articleList/${param}`);
+  };
+
   return (
     <CategoryList>
       {CATEGORY_DATAS.map(categorydata => {
         return (
-          <Category key={categorydata.id}>{categorydata.category}</Category>
+          <Category key={categorydata.id} onClick={goToCategory}>
+            {categorydata.category}
+          </Category>
         );
       })}
     </CategoryList>
