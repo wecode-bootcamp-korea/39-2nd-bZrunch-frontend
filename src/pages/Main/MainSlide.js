@@ -1,16 +1,28 @@
 import React from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import Slider from 'react-slick';
 import styled from 'styled-components';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 const MainSlide = () => {
+  const navigate = useNavigate();
+  const param = useParams();
+  const userId = param.user_id;
+  const writingId = param.writing_id;
+
+  console.log(param);
+
+  const goToArticle = () => {
+    navigate(`/article/writings/${userId}/${writingId}`);
+  };
+
   return (
     <AllSlide>
       <Slider {...settings}>
         {SLIDE_DATAS.map(slidedata => {
           return (
-            <Set key={slidedata.id}>
+            <Set key={slidedata.id} onClick={goToArticle}>
               <SlideText>
                 <TextTitle>{slidedata.title}</TextTitle>
                 <TextWriter>by. {slidedata.writer}</TextWriter>
@@ -132,6 +144,7 @@ const SlideText = styled.div`
   line-height: 50px;
   text-align: center;
   z-index: 1;
+  cursor: pointer;
 
   &:hover + ${SingleSlide} {
     transform: scale(1.06);
@@ -195,8 +208,8 @@ const SLIDE_DATAS = [
   {
     id: 8,
     img: 'images/kimboyoon/슬라이드이미지8.jpg',
-    writer: '집순이',
-    title: '집에 가고싶다',
+    writer: '갓지영',
+    title: '코딩은 껌이지',
   },
 ];
 
