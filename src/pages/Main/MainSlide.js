@@ -67,13 +67,13 @@ const AllSlide = styled.div`
 
   .slick-prev:before,
   .slick-next:before {
-    font-size: 70px;
-
     height: 0;
-
-    opacity: 0.3;
+    font-size: 70px;
     color: white;
+    opacity: 0.3;
   }
+
+
 
   .slick-prev {
     left: 10px;
