@@ -3,9 +3,6 @@ import { useNavigate, useLocation, useSearchParams } from 'react-router-dom';
 
 const KakaoLogin = () => {
   const navigate = useNavigate();
-  // const location = useLocation();
-  // const KAKAO_CODE = location.search.split('=')[1];
-  // console.log(location);
   const [searchParams, setSearchParams] = useSearchParams();
   const KAKAO_CODE = searchParams.get('code');
 
@@ -26,12 +23,12 @@ const KakaoLogin = () => {
         localStorage.setItem('name', data.userInfo.name);
         localStorage.setItem('profile_image', data.userInfo.profile_image);
         navigate('/');
+        console.log(data.userInfo);
       } else {
         alert('다시 시도해주세요!');
         navigate('/login');
       }
     });
-
   return;
 };
 
