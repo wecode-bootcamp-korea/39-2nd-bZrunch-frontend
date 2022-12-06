@@ -1,5 +1,5 @@
-import React from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Slider from 'react-slick';
 import styled from 'styled-components';
 import 'slick-carousel/slick/slick.css';
@@ -7,28 +7,30 @@ import 'slick-carousel/slick/slick-theme.css';
 
 const MainSlide = () => {
   const navigate = useNavigate();
-  const param = useParams();
-  const userId = param.user_id;
-  const writingId = param.writing_id;
+  const [slideDatas, setSlideDatas] = useState([]);
 
-  console.log(param);
-
-  const goToArticle = () => {
-    navigate(`/article/writings/${userId}/${writingId}`);
+  const goToArticle = id => {
+    navigate(`/article/writings/${id}`);
   };
+
+  useEffect(() => {
+    fetch('http://10.58.52.136:3000/main/list')
+      .then(res => res.json())
+      .then(data => setSlideDatas(data.result.writing));
+  }, []);
 
   return (
     <AllSlide>
       <Slider {...settings}>
-        {SLIDE_DATAS.map(slidedata => {
+        {slideDatas.map(slidedata => {
           return (
-            <Set key={slidedata.id} onClick={goToArticle}>
+            <Set key={slidedata.id} onClick={() => goToArticle(slidedata.id)}>
               <SlideText>
                 <TextTitle>{slidedata.title}</TextTitle>
-                <TextWriter>by. {slidedata.writer}</TextWriter>
+                <TextWriter>by. {slidedata.authors}</TextWriter>
               </SlideText>
               <SingleSlide
-                src={slidedata.img}
+                src={slidedata.header_image}
                 alt={`${slidedata.title}의 대표 이미지`}
               />
             </Set>
@@ -161,56 +163,5 @@ const TextWriter = styled.div`
   font-size: 20px;
   font-family: 'Noto Sans KR', sans-serif;
 `;
-
-const SLIDE_DATAS = [
-  {
-    id: 1,
-    img: 'images/kimboyoon/슬라이드이미지1.jpg',
-    writer: '김건우',
-    title: '카카오에서 만나요',
-  },
-  {
-    id: 2,
-    img: 'images/kimboyoon/슬라이드이미지2.jpg',
-    writer: '김보윤',
-    title: '맨 땅에 개발자되기',
-  },
-  {
-    id: 3,
-    img: 'images/kimboyoon/슬라이드이미지3.jpg',
-    writer: '이동근',
-    title: '위코드에서 살아남는 법',
-  },
-  {
-    id: 4,
-    img: 'images/kimboyoon/슬라이드이미지4.jpg',
-    writer: '멍멍',
-    title: '내 인생의 첫 강아지',
-  },
-  {
-    id: 5,
-    img: 'images/kimboyoon/슬라이드이미지5.jpg',
-    writer: '오현상',
-    title: '실리콘밸리 취업하기',
-  },
-  {
-    id: 6,
-    img: 'images/kimboyoon/슬라이드이미지6.jpg',
-    writer: '이유주',
-    title: '다음 승진은 너차례야',
-  },
-  {
-    id: 7,
-    img: 'images/kimboyoon/슬라이드이미지7.jpg',
-    writer: '여행자',
-    title: '여행가고 싶다',
-  },
-  {
-    id: 8,
-    img: 'images/kimboyoon/슬라이드이미지8.jpg',
-    writer: '갓지영',
-    title: '코딩은 껌이지',
-  },
-];
 
 export default MainSlide;

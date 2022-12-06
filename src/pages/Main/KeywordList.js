@@ -1,20 +1,29 @@
-import React from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const KeywordList = () => {
   const navigate = useNavigate();
-  const param = useParams();
+  const [categoryDatas, setCategoryDatas] = useState([]);
 
-  const goToCategory = () => {
-    navigate(`/articleList/${param}`);
+  const goToCategory = id => {
+    navigate(`/articleList/${id}`);
   };
+
+  useEffect(() => {
+    fetch('http://10.58.52.136:3000/main/list')
+      .then(res => res.json())
+      .then(data => setCategoryDatas(data.result.category));
+  }, []);
 
   return (
     <CategoryList>
-      {CATEGORY_DATAS.map(categorydata => {
+      {categoryDatas.map(categorydata => {
         return (
-          <Category key={categorydata.id} onClick={goToCategory}>
+          <Category
+            key={categorydata.id}
+            onClick={() => goToCategory(categorydata.id)}
+          >
             {categorydata.category}
           </Category>
         );

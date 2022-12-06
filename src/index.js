@@ -5,11 +5,14 @@ import GlobalStyle from './styles/GlobalStyle';
 import theme from './styles/theme';
 import Router from './Router';
 import variables from './styles/variables';
+import ScrollToTop from './components/ScrollToTop';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <ThemeProvider theme={{ theme, variables }}>
     <GlobalStyle />
-    <Router />
+    <Router>
+      <ScrollToTop />
+    </Router>
   </ThemeProvider>
 );
