@@ -1,15 +1,13 @@
 import React from 'react';
-import { useNavigate, useLocation, useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 const KakaoLogin = () => {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const KAKAO_CODE = searchParams.get('code');
 
-  // http://10.58.52.185:3000/user/signin
-  // http://10.58.52.229:3000/auth/signin
   // 카카오 인가코드 백엔드에게 전송
-  fetch('http://10.58.52.185:3000/user/signin', {
+  fetch('http://10.58.52.136:3000/auth/signin', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
@@ -23,12 +21,12 @@ const KakaoLogin = () => {
         localStorage.setItem('name', data.userInfo.name);
         localStorage.setItem('profile_image', data.userInfo.profile_image);
         navigate('/');
-        console.log(data.userInfo);
       } else {
         alert('다시 시도해주세요!');
         navigate('/login');
       }
     });
+
   return;
 };
 
