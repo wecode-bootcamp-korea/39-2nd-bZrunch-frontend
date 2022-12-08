@@ -99,14 +99,14 @@ const CategoryBtn = styled.button`
 const WRITER_DATAS = [
   {
     id: 1,
-    writerImg: 'images/kimboyoon/김건우.png',
+    writerImg: '/images/kimboyoon/kunwoo.png',
     name: '김건우',
     content: '안녕하세요. 까탈스러운 판교 사는 냥반입니다.',
     category: '풀스택',
   },
   {
     id: 2,
-    writerImg: 'images/kimboyoon/김보윤.jpg',
+    writerImg: '/images/kimboyoon/boyoon.jpg',
     name: '김보윤',
     content:
       '안녕하세요. 매일 성장하는 개발자, 김보윤입니다. 기록용으로 소소하게 글을 쓰고 있어요.',
@@ -114,22 +114,21 @@ const WRITER_DATAS = [
   },
   {
     id: 3,
-    writerImg: 'images/kimboyoon/이유주.jpeg',
+    writerImg: '/images/kimboyoon/lee.jpeg',
     name: '이유주',
-    content:
-      '안녕하세요. 프론트엔드 개발자 김보윤입니다.안녕하세요. 프론트엔드 개발자 김보윤입니다.',
+    content: '안녕하세요. 프론트엔드 개발자 이유주입니다..비움 작가 입니다.',
     category: '프론트엔드',
   },
   {
     id: 4,
-    writerImg: 'images/kimboyoon/오현상.jpg',
+    writerImg: '/images/kimboyoon/oh.jpg',
     name: '오현상',
     content: '먹은 만큼 성장하는 개발자 스토리텔러 입니다',
     category: '벡엔드',
   },
   {
     id: 5,
-    writerImg: 'images/kimboyoon/이동근.jpg',
+    writerImg: '/images/kimboyoon/dong.jpg',
     name: '이동근',
     content:
       '안녕하세요. 프론트엔드 개발자 김보윤입니다.안녕하세요. 프론트엔드 개발자 김보윤입니다.',

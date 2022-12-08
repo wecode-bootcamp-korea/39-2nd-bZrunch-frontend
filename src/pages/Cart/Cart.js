@@ -78,29 +78,37 @@ const Cart = () => {
       </HeadContent>
       <Main>
         <CartMainWrapper>
-          {cartDatas.map(cartData => {
-            const { id, title, authors, content, header_image, price, color } =
-              cartData;
+          {cartDatas.length &&
+            cartDatas.map(cartData => {
+              const {
+                id,
+                title,
+                authors,
+                content,
+                header_image,
+                price,
+                color,
+              } = cartData;
 
-            return (
-              <ItemWrapper key={id}>
-                <ItemTextWrapper>
-                  <ItemTitle>{title}</ItemTitle>
-                  <ItemText>{authors}</ItemText>
-                  <ItemText>{content}</ItemText>
-                </ItemTextWrapper>
-                {color ? (
-                  <Color color={color} />
-                ) : (
-                  <ItemImg src={header_image} alt={`${title} 대표이미지`} />
-                )}
-                <ItemRight>
-                  <ItemPrice>{Number(price).toLocaleString()}원</ItemPrice>
-                  <DeleteBtn onClick={() => deleteAriticle(id)} />
-                </ItemRight>
-              </ItemWrapper>
-            );
-          })}
+              return (
+                <ItemWrapper key={id}>
+                  <ItemTextWrapper>
+                    <ItemTitle>{title}</ItemTitle>
+                    <ItemText>{authors}</ItemText>
+                    <ItemText>{content}</ItemText>
+                  </ItemTextWrapper>
+                  {color ? (
+                    <Color color={color} />
+                  ) : (
+                    <ItemImg src={header_image} alt={`${title} 대표이미지`} />
+                  )}
+                  <ItemRight>
+                    <ItemPrice>{Number(price).toLocaleString()}원</ItemPrice>
+                    <DeleteBtn onClick={() => deleteAriticle(id)} />
+                  </ItemRight>
+                </ItemWrapper>
+              );
+            })}
         </CartMainWrapper>
         <SideWrapper>
           <Order>
@@ -136,6 +144,7 @@ const WrapperContent = styled.div`
   width: 80%;
   height: 90%;
   margin: 80px auto 0;
+  margin-bottom: 400px;
 `;
 
 const HeadContent = styled.div`

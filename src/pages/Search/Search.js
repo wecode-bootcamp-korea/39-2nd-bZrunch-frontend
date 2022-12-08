@@ -13,11 +13,10 @@ const Search = () => {
     searchParams.set('searchWord', searchWord);
     setSearchParams(searchParams);
 
-    fetch(`http://10.58.52.229:3000/writings/search?${searchParams.toString()}`)
+    fetch(`http://10.58.52.137:3000/writings/search?${searchParams.toString()}`)
       .then(response => response.json())
       .then(data => setGetData(data.result));
   }, [searchParams, searchWord, setSearchParams]);
-
   return (
     <>
       <Inputall>
@@ -65,10 +64,7 @@ const Search = () => {
             <Wrap to="/">
               <Profile src="/images/Search/boyoon.png" />
               <Name>보보</Name>
-              <Comment>
-                안녕하세요. 매일 성장하는 개발자, 김보윤입니다. 기록용으로
-                소소하게 글을 쓰고 있어요.
-              </Comment>
+              <Comment>매일 성장하는 개발자, 김보윤입니다.</Comment>
             </Wrap>
             <Wrap to="/">
               <Profile src="/images/Search/kunwoo.png" />
@@ -98,6 +94,7 @@ const Coder = styled.span`
 
 const Main = styled.div`
   margin-top: 80px;
+  margin-bottom: 250px;
   @keyframes fadeInDown {
     0% {
       opacity: 0;
@@ -174,6 +171,7 @@ const Contents = styled.div`
   display: flex;
   font-size: 14px;
   color: #959595;
+  margin-bottom: 450px;
   @keyframes fadeInDown {
     0% {
       opacity: 0;

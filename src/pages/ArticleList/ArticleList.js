@@ -23,7 +23,7 @@ const ArticleList = () => {
 
   useEffect(() => {
     fetch(
-      `http://10.58.52.136:3000/writings?cate_id=${cate_id}&${searchParams.toString()}`
+      `http://10.58.52.137:3000/writings?cate_id=${cate_id}&${searchParams.toString()}`
     )
       .then(res => res.json())
       .then(data => setPriceList(data.result));
@@ -132,9 +132,9 @@ const TITLE_LIST = [
   '위코드',
   '자바스크립트',
   '일상',
-  '개발자 카페 소개',
-  '개발자와 데이트',
-  '개발자의 입 맛',
-  '개발자와 여행',
+  '카페',
+  '데이트',
+  '맛집',
+  '여행',
   '취업',
 ];
