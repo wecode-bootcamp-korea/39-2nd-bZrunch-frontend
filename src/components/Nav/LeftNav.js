@@ -46,7 +46,7 @@ const LeftNav = ({ isOpen, handleBtn }) => {
       </Header>
       <Main>
         <HomeLink to="/">브Z런치 홈</HomeLink>
-        <NowLink to="/articleList">브Z런치 나우</NowLink>
+        <NowLink to="/articleList/1">브Z런치 나우</NowLink>
         {token ? (
           <>
             <MyPageLink to="/myPage">마이 페이지</MyPageLink>

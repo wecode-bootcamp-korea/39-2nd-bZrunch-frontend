@@ -6,9 +6,8 @@ const ListBox = ({ priceList }) => {
   const navigate = useNavigate();
 
   const goToArticle = id => {
-    navigate(`/article/writings/${id}`);
+    navigate(`/article/${id}`);
   };
-
   return (
     <WrapContent>
       {priceList.map(data => {
@@ -21,20 +20,31 @@ const ListBox = ({ priceList }) => {
                 <SpanText>댓글</SpanText>
                 <SpanNum>{data.re}</SpanNum>
                 <IconDot />
-                <SpanNum>{data.time}</SpanNum>
-                <SpanText>분전</SpanText>
-                <IconDot />
                 <SpanTextBy>by</SpanTextBy>
                 <SpanText>{data.authors}</SpanText>
               </SubContentSpan>
             </PostTitle>
-            <Image src={data.header_image} />
+            {data.color ? (
+              <Color color={data.color} />
+            ) : (
+              <ItemImg
+                src={data.header_image}
+                alt={`${data.title} 대표이미지`}
+              />
+            )}
           </ArticleLi>
         );
       })}
     </WrapContent>
   );
 };
+
+const Color = styled.div`
+  background-color: ${({ color }) => color};
+  height: 150px;
+  width: 150px;
+  opacity: 0.73;
+`;
 
 const WrapContent = styled.div`
   padding-top: 20px;
@@ -106,66 +116,9 @@ const IconDot = styled.img`
   display: inline-block;
 `;
 
-const Image = styled.img`
-  width: 200px;
-  height: 150px;
+const ItemImg = styled.img`
+  width: 140px;
+  height: 140px;
 `;
 
 export default ListBox;
-
-const ListData = [
-  {
-    id: 0,
-    title: '정말어렵다',
-    sub: '여기는 서브 내용이 들어갑니다.여기는 서브 내용이들어갑니다.여기는 서브 내용이 들어갑니다.여기는 서브내용이 들어갑니다.여기는 서브 내용이 들어갑니다.여기는서브 내용이 들어갑니다.여기는 서브 내용이들어갑니다.여기는 서브 내용이 들어갑니다.여기는 서브내용이 들어갑니다.여기는 서브 내용이 들어갑니다.',
-    re: '0',
-    time: '10',
-    username: '김건우',
-    img: '/images/ArticleList/cat.jpg',
-  },
-  {
-    id: 1,
-    title: '진짜로',
-    sub: ' 화이팅!!!화이팅!!!화이팅!!!화이팅!!!화이팅!!!화이팅!!!화이팅!!!화이팅!!!화이팅!!!화이팅!!!화이팅!!!화이팅!!!화이팅!!!화이팅!!!화이팅!!!화이팅!!!화이팅!!!화이팅!!!화이팅!!!화이팅!!!화이팅!!!화이팅!!!',
-    re: '10',
-    time: '20',
-    username: '김건우',
-    img: '/images/ArticleList/gom.jpeg',
-  },
-  {
-    id: 2,
-    title: '완전!',
-    sub: '여기는 서브 내용이 들어갑니다.여기는서브 내용이 들어갑니다.여기는 서브 내용이들어갑니다.여기는 서브 내용이 들어갑니다.여기는 서브내용이 들어갑니다.여기는 서브 내용이 들어갑니다.여기는서브 내용이 들어갑니다.여기는 서브 내용이 들어갑니다.',
-    re: '30',
-    time: '10',
-    username: '김건우',
-    img: '/images/ArticleList/cat.jpg',
-  },
-  {
-    id: 3,
-    title: '진짜로',
-    sub: ' 화이팅!!!화이팅!!!화이팅!!!화이팅!!!화이팅!!!화이팅!!!화이팅!!!화이팅!!!화이팅!!!화이팅!!!화이팅!!!화이팅!!!화이팅!!!화이팅!!!화이팅!!!화이팅!!!화이팅!!!화이팅!!!화이팅!!!화이팅!!!화이팅!!!화이팅!!!',
-    re: '10',
-    time: '20',
-    username: '김건우',
-    img: '/images/ArticleList/gom.jpeg',
-  },
-  {
-    id: 4,
-    title: '완전!',
-    sub: '여기는 서브 내용이 들어갑니다.여기는 서브내용이 들어갑니다.여기는 서브 내용이 들어갑니다.여기는서브 내용이 들어갑니다.여기는 서브 내용이들어갑니다.여기는 서브 내용이 들어갑니다.여기는 서브내용이 들어갑니다.여기는 서브 내용이 들어갑니다.여기는서브 내용이 들어갑니다.여기는 서브 내용이 들어갑니다.',
-    re: '30',
-    time: '10',
-    username: '김건우',
-    img: '/images/ArticleList/cat.jpg',
-  },
-  {
-    id: 5,
-    title: '진짜로',
-    sub: ' 화이팅!!!화이팅!!!화이팅!!!화이팅!!!화이팅!!!화이팅!!!화이팅!!!화이팅!!!화이팅!!!화이팅!!!화이팅!!!화이팅!!!화이팅!!!화이팅!!!화이팅!!!화이팅!!!화이팅!!!화이팅!!!화이팅!!!화이팅!!!화이팅!!!화이팅!!!',
-    re: '10',
-    time: '20',
-    username: '김건우',
-    img: '/images/ArticleList/gom.jpeg',
-  },
-];

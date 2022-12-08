@@ -8,29 +8,16 @@ const MyPage = () => {
   const [myLikes, setMyLikes] = useState([]);
   const [myWritings, setMyWritings] = useState([]);
   const [myPurchase, setMyPurchase] = useState([]);
-  // const data = [myLikes, myWritings, myPurchase];
   const [searchParams, setSearchParams] = useSearchParams();
   const limit = searchParams.get('limit');
 
-  // 'http://10.58.52.229:3000/mypage/mylikes'
-
-  // useEffect(() => {
-  //   fetch('/data/Article.json')
-  //     .then(response => response.json())
-  //     .then(result => {
-  //       setMyInfo(result);
-  //     });
-  // }, []);
-
   useEffect(() => {
-    fetch('http://10.58.52.136:3000/mypage', {
-      method: 'POST',
+    fetch('http://10.58.52.137:3000/mypage', {
+      method: 'GET',
       headers: {
         'content-Type': 'application/json;charset=utf-8',
+        Authorization: localStorage.getItem('token'),
       },
-      body: JSON.stringify({
-        id: 1,
-      }),
     })
       .then(response => response.json())
       .then(data => {
@@ -39,52 +26,32 @@ const MyPage = () => {
   }, []);
 
   useEffect(() => {
-    fetch('http://10.58.52.136:3000/mypage/mylikes', {
-      method: 'POST',
+    fetch('http://10.58.52.137:3000/mypage/mylikes', {
+      method: 'GET',
       headers: {
         'content-Type': 'application/json;charset=utf-8',
+        Authorization: localStorage.getItem('token'),
       },
-      body: JSON.stringify({
-        id: 1,
-      }),
     })
       .then(response => response.json())
       .then(data => {
         setMyLikes(data.result);
       });
   }, []);
-  console.log(myLikes);
+
   useEffect(() => {
-    fetch('http://10.58.52.136:3000/mypage/mywritings', {
-      method: 'POST',
+    fetch('http://10.58.52.137:3000/mypage/mywritings', {
+      method: 'GET',
       headers: {
         'content-Type': 'application/json;charset=utf-8',
+        Authorization: localStorage.getItem('token'),
       },
-      body: JSON.stringify({
-        id: 1,
-      }),
     })
       .then(response => response.json())
       .then(result => {
         setMyWritings(result.result);
       });
   }, []);
-
-  // useEffect(() => {
-  //   fetch('http://10.58.52.136:3000/mypage/mypurchase', {
-  //     method: 'POST',
-  //     headers: {
-  //       'content-Type': 'application/json;charset=utf-8',
-  //     },
-  //     body: JSON.stringify({
-  //       id: 1,
-  //     }),
-  //   })
-  //     .then(response => response.json())
-  //     .then(result => {
-  //       setMyPurchase(result.result);
-  //     });
-  // }, []);
 
   return (
     <Mypage>
@@ -111,12 +78,9 @@ const MyPage = () => {
             </LinkBtn>
           </Container>
           <ArticleBoxWrap>
-            <LinkBtn to="/mywritings">
+            <LinkBtn>
               <FourArticleBox title="내가 쓴 글 〉" data={myWritings} />
             </LinkBtn>
-            {/* <LinkBtn>
-              <FourArticleBox title="구매한 글 〉" data={myPurchase} />
-            </LinkBtn> */}
             <LinkBtn>
               <FourArticleBox title="좋아요 한 글 〉" data={myLikes} />
             </LinkBtn>
@@ -144,7 +108,9 @@ const Profile = styled.img`
   right: 170px;
 `;
 
-const Mypage = styled.div``;
+const Mypage = styled.div`
+  margin-bottom: 300px;
+`;
 
 const Main = styled.main``;
 

@@ -3,9 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 function ArticleBox({ data }) {
-  const style = {
-    backgroundColor: data.color,
-  };
+  console.log(data);
   return (
     <Articlebox>
       <Content to={`/article/${data.id}`}>
@@ -13,19 +11,27 @@ function ArticleBox({ data }) {
         <Description>{data.content}</Description>
         <Description>by {data.authors}</Description>
       </Content>
-      {data.color ? (
-        <Color style={style} />
-      ) : (
-        <Image src={data.header_image} alt="later" />
-      )}
+      <Link to={`/article/${data.id}`}>
+        {data.color ? (
+          <Color color={data.color} />
+        ) : (
+          <ItemImg src={data.header_image} alt={`${data.title} 대표이미지`} />
+        )}
+      </Link>
     </Articlebox>
   );
 }
 
+const ItemImg = styled.img`
+  width: 140px;
+  height: 140px;
+`;
+
 const Color = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 100%;
+  background-color: ${({ color }) => color};
+  height: 150px;
+  width: 150px;
+  opacity: 0.73;
 `;
 
 const Articlebox = styled.div`
@@ -56,7 +62,6 @@ const Description = styled.div`
 const Image = styled.img`
   width: 100px;
   height: 100px;
-  margin: ;
 `;
 
 export default ArticleBox;

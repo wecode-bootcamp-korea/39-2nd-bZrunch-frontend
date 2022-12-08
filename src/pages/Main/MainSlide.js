@@ -10,11 +10,11 @@ const MainSlide = () => {
   const [slideDatas, setSlideDatas] = useState([]);
 
   const goToArticle = id => {
-    navigate(`/article/writings/${id}`);
+    navigate(`/article/${id}`);
   };
 
   useEffect(() => {
-    fetch('http://10.58.52.136:3000/main/list')
+    fetch('http://10.58.52.137:3000/main/list')
       .then(res => res.json())
       .then(data => setSlideDatas(data.result.writing));
   }, []);

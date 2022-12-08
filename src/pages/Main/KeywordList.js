@@ -11,7 +11,7 @@ const KeywordList = () => {
   };
 
   useEffect(() => {
-    fetch('http://10.58.52.136:3000/main/list')
+    fetch('http://10.58.52.137:3000/main/list')
       .then(res => res.json())
       .then(data => setCategoryDatas(data.result.category));
   }, []);
@@ -56,20 +56,5 @@ const Category = styled.button`
     cursor: pointer;
   }
 `;
-
-const CATEGORY_DATAS = [
-  { id: 1, category: '개발자' },
-  { id: 2, category: '프론트엔드' },
-  { id: 3, category: '백엔드' },
-  { id: 4, category: '웹개발' },
-  { id: 5, category: '위코드' },
-  { id: 6, category: '자바스크립트' },
-  { id: 7, category: '일상' },
-  { id: 8, category: '카페' },
-  { id: 9, category: '데이트' },
-  { id: 10, category: '맛집' },
-  { id: 11, category: '여행' },
-  { id: 12, category: '취업' },
-];
 
 export default KeywordList;

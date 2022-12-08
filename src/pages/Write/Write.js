@@ -86,6 +86,7 @@ const Write = () => {
       method: 'POST',
       headers: {
         'content-Type': 'application/json;charset=utf-8',
+        Authorization: localStorage.getItem('token'),
       },
       body: JSON.stringify({
         user_id: 1,

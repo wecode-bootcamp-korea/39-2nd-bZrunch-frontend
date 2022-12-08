@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 const Article = () => {
   //article 내용 가져오기
   const [getArticle, setGetArticle] = useState({});
   const { writing_id } = useParams();
+  const naviCart = useNavigate();
 
   useEffect(() => {
     fetch(`http://10.58.52.137:3000/writings/${writing_id}`)
@@ -26,7 +27,7 @@ const Article = () => {
     header_image,
     color,
   } = getArticle;
-
+  console.log(getArticle);
   //추천글 mockdata 내용 가져오기
   const [getRecommend, setGetRecommend] = useState([]);
 
@@ -56,12 +57,8 @@ const Article = () => {
       method: 'POST',
       headers: {
         'content-Type': 'application/json;charset=utf-8',
-        Authorization:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjEsImlhdCI6MTY3MDQ3NzA4MX0.h5WsYzvNeukqgZ8Xm60l-Jyai0gmQ-NFMn72BA2yZ9U',
+        Authorization: localStorage.getItem('token'),
       },
-      body: JSON.stringify({
-        id: 1,
-      }),
     }).then(response => response.json());
   }, [isSubscribe, author_id]);
 
@@ -85,31 +82,28 @@ const Article = () => {
       method: 'POST',
       headers: {
         'content-Type': 'application/json;charset=utf-8',
-        Authorization:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjEsImlhdCI6MTY3MDQ3NzA4MX0.h5WsYzvNeukqgZ8Xm60l-Jyai0gmQ-NFMn72BA2yZ9U',
+        Authorization: localStorage.getItem('token'),
       },
-      body: JSON.stringify({
-        id: 1,
-      }),
     }).then(response => response.json());
   }, [isActive, id]);
 
   //장바구니로 데이터 보내기
 
   const sendItem = () => {
-    fetch('http://10.58.52.136:3000/carts', {
+    fetch('http://10.58.52.137:3000/carts', {
       method: 'POST',
       headers: {
         'content-Type': 'application/json;charset=utf-8',
-        Authorization:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjEsImlhdCI6MTY3MDQxMzU3OX0.uUWBNp7Lzw28y2nU-lZAJJ7p00RT24Y6eodTiw7jNBQ',
+        Authorization: localStorage.getItem('token'),
       },
       body: JSON.stringify({
-        writingId: id,
+        writing_id: id,
       }),
     })
       .then(response => response.json())
-      .then(data => setGetArticle(data));
+      .then(data => {
+        naviCart('/cart');
+      });
   };
 
   return (
@@ -145,12 +139,8 @@ const Article = () => {
         <Body>
           <Purchase>구매 요청</Purchase>
           <Buttonwrap>
-            <BuyLink to="/cart">
-              <BuyButton onclick={sendItem}>장바구니 담기</BuyButton>
-            </BuyLink>
-            <BuyLink to="/cart">
-              <BuyButton>결제하기</BuyButton>
-            </BuyLink>
+            <BuyButton onClick={sendItem}>장바구니 담기</BuyButton>
+            <BuyButton>결제하기</BuyButton>
           </Buttonwrap>
         </Body>
       )}
@@ -198,6 +188,7 @@ const Purchase = styled.div`
 
 const BackImg = styled.img`
   width: 100%;
+  height: 100%;
 `;
 
 const BuyLink = styled(Link)``;
@@ -242,7 +233,7 @@ const Recommend = styled.div`
 
 const Header = styled.header`
   border-bottom: 1px solid black;
-  height: 400px;
+  height: 600px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -285,9 +276,10 @@ const Likes = styled.span``;
 
 const BodyContents = styled.div`
   font-family: 'Noto Sans KR', sans-serif;
-  margin: 30px auto;
+  margin: 0 auto;
   padding-top: 30px;
   width: 700px;
+  font-size: 25px;
 `;
 
 const Body = styled.div`

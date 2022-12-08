@@ -13,14 +13,13 @@ import MyPage from './pages/MyPage/MyPage';
 import Search from './pages/Search/Search';
 import Write from './pages/Write/Write';
 import KakaoPayFail from './pages/Cart/KakaoPayFail';
-import MyPageList from './pages/MyPage/MyPageList';
 
 const Router = () => {
   return (
     <BrowserRouter>
       <Nav />
       <Routes>
-        <Route path="/article/writings/:writing_id" element={<Article />} />
+        <Route path="/article/:writing_id" element={<Article />} />
         <Route path="/articleList/:cate_id" element={<ArticleList />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/login" element={<Login />} />
@@ -31,7 +30,6 @@ const Router = () => {
         <Route path="/payment/cancel" element={<KakaoPayFail />} />
         <Route path="/search" element={<Search />} />
         <Route path="/write" element={<Write />} />
-        <Route path="/mywritings" element={<MyPageList />} />
       </Routes>
       <Footer />
     </BrowserRouter>

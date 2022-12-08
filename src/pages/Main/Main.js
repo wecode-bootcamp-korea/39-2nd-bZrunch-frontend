@@ -29,7 +29,7 @@ const Main = () => {
 };
 
 const Header = styled.header`
-  margin: 60px 0 0 25%;
+  margin: 117px 0 0 25%;
   font-family: 'Nanum Myeongjo', serif;
   font-size: 40px;
 `;
