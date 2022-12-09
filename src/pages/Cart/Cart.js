@@ -77,39 +77,43 @@ const Cart = () => {
         <HeadTitle>SHOPPING CART</HeadTitle>
       </HeadContent>
       <Main>
-        <CartMainWrapper>
-          {cartDatas.length &&
-            cartDatas.map(cartData => {
-              const {
-                id,
-                title,
-                authors,
-                content,
-                header_image,
-                price,
-                color,
-              } = cartData;
+        {cartDatas.length === 0 ? (
+          <ZeroContent>장바구니 비움..</ZeroContent>
+        ) : (
+          <CartMainWrapper>
+            {cartDatas.length &&
+              cartDatas.map(cartData => {
+                const {
+                  id,
+                  title,
+                  authors,
+                  content,
+                  header_image,
+                  price,
+                  color,
+                } = cartData;
 
-              return (
-                <ItemWrapper key={id}>
-                  <ItemTextWrapper>
-                    <ItemTitle>{title}</ItemTitle>
-                    <ItemText>{authors}</ItemText>
-                    <ItemText>{content}</ItemText>
-                  </ItemTextWrapper>
-                  {color ? (
-                    <Color color={color} />
-                  ) : (
-                    <ItemImg src={header_image} alt={`${title} 대표이미지`} />
-                  )}
-                  <ItemRight>
-                    <ItemPrice>{Number(price).toLocaleString()}원</ItemPrice>
-                    <DeleteBtn onClick={() => deleteAriticle(id)} />
-                  </ItemRight>
-                </ItemWrapper>
-              );
-            })}
-        </CartMainWrapper>
+                return (
+                  <ItemWrapper key={id}>
+                    <ItemTextWrapper>
+                      <ItemTitle>{title}</ItemTitle>
+                      <ItemText>{authors}</ItemText>
+                      <ItemText>{content}</ItemText>
+                    </ItemTextWrapper>
+                    {color ? (
+                      <Color color={color} />
+                    ) : (
+                      <ItemImg src={header_image} alt={`${title} 대표이미지`} />
+                    )}
+                    <ItemRight>
+                      <ItemPrice>{Number(price).toLocaleString()}원</ItemPrice>
+                      <DeleteBtn onClick={() => deleteAriticle(id)} />
+                    </ItemRight>
+                  </ItemWrapper>
+                );
+              })}
+          </CartMainWrapper>
+        )}
         <SideWrapper>
           <Order>
             <ArticlePrice>
@@ -136,6 +140,14 @@ const Cart = () => {
     </WrapperContent>
   );
 };
+
+const ZeroContent = styled.div`
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 60px;
+  margin-top: 100px;
+  margin-left: 100px;
+  color: ${props => props.theme.theme.mint};
+`;
 
 const WrapperContent = styled.div`
   display: flex;

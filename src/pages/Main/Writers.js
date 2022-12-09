@@ -108,8 +108,7 @@ const WRITER_DATAS = [
     id: 2,
     writerImg: '/images/kimboyoon/boyoon.jpg',
     name: '김보윤',
-    content:
-      '안녕하세요. 매일 성장하는 개발자, 김보윤입니다. 기록용으로 소소하게 글을 쓰고 있어요.',
+    content: '안녕하세요. 기록용으로 소소하게 글을 쓰고 있어요.',
     category: '프론트엔드',
   },
   {
@@ -130,8 +129,7 @@ const WRITER_DATAS = [
     id: 5,
     writerImg: '/images/kimboyoon/dong.jpg',
     name: '이동근',
-    content:
-      '안녕하세요. 프론트엔드 개발자 김보윤입니다.안녕하세요. 프론트엔드 개발자 김보윤입니다.',
+    content: '안녕하세요. 함께 성장하는 개발자 동그리입니다.',
     category: '백엔드',
   },
   {
@@ -139,8 +137,7 @@ const WRITER_DATAS = [
     writerImg:
       'https://image.rocketpunch.com/company/99609/wecode_logo_1590553949.jpg?s=400x400&t=inside',
     name: '위코드',
-    content:
-      '안녕하세요. 프론트엔드 개발자 김보윤입니다.안녕하세요. 프론트엔드 개발자 김보윤입니다.',
+    content: '위코드39기 화이팅!',
     category: '부트캠프',
   },
 ];
