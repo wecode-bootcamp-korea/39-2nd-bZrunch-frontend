@@ -1,8 +1,9 @@
 import React, { useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const LeftNav = ({ isOpen, handleBtn }) => {
+  const navigate = useNavigate();
   const sideRef = useRef(null);
   const token = localStorage.getItem('token');
   const name = localStorage.getItem('name');
@@ -12,6 +13,15 @@ const LeftNav = ({ isOpen, handleBtn }) => {
     if (isOpen && !sideRef.current.contains(e.target)) {
       handleBtn();
     }
+  };
+
+  const logout = () => {
+    localStorage.removeItem('name');
+    localStorage.removeItem('token');
+    localStorage.removeItem('profile_image');
+    localStorage.removeItem('tid');
+    navigate('/');
+    alert('로그아웃 되었습니다!');
   };
 
   useEffect(() => {
@@ -51,7 +61,7 @@ const LeftNav = ({ isOpen, handleBtn }) => {
           <>
             <MyPageLink to="/myPage">마이 페이지</MyPageLink>
             <CartLink to="/cart">장바구니</CartLink>
-            <LogoutBtn>로그아웃</LogoutBtn>
+            <LogoutBtn onClick={logout}>로그아웃</LogoutBtn>
           </>
         ) : (
           <Forget>계정을 잊어버리셨나요?</Forget>

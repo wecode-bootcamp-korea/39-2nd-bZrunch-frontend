@@ -339,7 +339,7 @@ const TopWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 450px;
+  height: 550px;
   border-bottom: 1px solid #eee;
   position: relative;
 
@@ -367,6 +367,7 @@ const TopWrapper = styled.div`
 `;
 
 const Title = styled.input`
+  color: white;
   font-size: 34px;
   border: none;
   text-align: center;
