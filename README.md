@@ -2,9 +2,8 @@
 
 ### 프로젝트 사이트 : brunch(브런치)
 
-<aside> 우리모두 작가가 되어보아요!
+우리모두 작가가 되어보아요! <br>
 수수료 0%! 방구석 작가를 위한 서비스!
-</aside>
 
 ### 개발 기간
 
@@ -12,18 +11,28 @@
 
 ### 참여 개발자
 
-Front-end Developers
-김건우, 김보윤, 이유주
-
-|김건우|김보윤|이유주|
-|---|:---|---:|
-|김건우|[![텍스트](https://camo.githubusercontent.com/4c8ff408d7b8658d244e8dc7a764f24381721f63654652aa2a05639b3b5cc943/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4769744875622d3138313731373f7374796c653d666f722d7468652d6261646765266c6f676f3d476974487562266c6f676f436f6c6f723d7768697465)](https://github.com/kimboyoon)|이유주|
+#### Front-end Developers <br>
+[김건우](https://github.com/leodioKim)
+[김보윤](https://github.com/kimboyoon)
+[이유주](https://github.com/yuzulike)
 
 ### 적용 기술
 
-Front-End
-JavaScript React Styled-Component
-협업 툴 : notion, trello
+#### Front-End
+<p display="inline">
+  <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"> 
+  <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black"> 
+  <img src="https://img.shields.io/badge/styledcomponent-DB7093?style=for-the-badge&logo=styled-components&logoColor=white"> 
+</p>
+ 
+#### 협업 툴
+<p display="inline">
+  <img src="https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=Notion&logoColor=white"> 
+  <img src="https://img.shields.io/badge/trello-0052CC?style=for-the-badge&logo=Trello&logoColor=white"> 
+</p>
+
+### Demo
+<a href="https://drive.google.com/file/d/17x1wNOCO07Vvt7bqkH9kv6i-WV3m0EDh/view?usp=share_link" target="_blank">bZrunch</a>
 
 ### 구현 기능
 
