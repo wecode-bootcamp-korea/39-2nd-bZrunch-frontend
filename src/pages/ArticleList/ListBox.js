@@ -8,6 +8,7 @@ const ListBox = ({ priceList }) => {
   const goToArticle = id => {
     navigate(`/article/${id}`);
   };
+
   return (
     <WrapContent>
       {priceList.map(data => {

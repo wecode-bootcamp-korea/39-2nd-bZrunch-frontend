@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { BASE_URL } from '../../config';
 import styled from 'styled-components';
 import FourArticleBox from './FourArticleBox/FourArticleBox';
@@ -8,9 +8,6 @@ const MyPage = () => {
   const [myInfo, setMyInfo] = useState([]);
   const [myLikes, setMyLikes] = useState([]);
   const [myWritings, setMyWritings] = useState([]);
-  const [myPurchase, setMyPurchase] = useState([]);
-  const [searchParams, setSearchParams] = useSearchParams();
-  const limit = searchParams.get('limit');
 
   useEffect(() => {
     fetch(`${BASE_URL}/mypage`, {
@@ -41,7 +38,7 @@ const MyPage = () => {
   }, []);
 
   useEffect(() => {
-    fetch(`${BASE_URL}0/mypage/mywritings`, {
+    fetch(`${BASE_URL}/mypage/mywritings`, {
       method: 'GET',
       headers: {
         'content-Type': 'application/json;charset=utf-8',
@@ -49,8 +46,8 @@ const MyPage = () => {
       },
     })
       .then(response => response.json())
-      .then(result => {
-        setMyWritings(result.result);
+      .then(data => {
+        setMyWritings(data.result);
       });
   }, []);
 

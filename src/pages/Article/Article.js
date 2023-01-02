@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
 import { BASE_URL } from '../../config';
+import styled from 'styled-components';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
 const Article = () => {
   //article 내용 가져오기
-  const { writing_id } = useParams();
   const naviCart = useNavigate();
+  const { writing_id } = useParams();
   const [getArticle, setGetArticle] = useState({});
 
   useEffect(() => {
     fetch(`${BASE_URL}/writings/${writing_id}`)
-      .then(response => response.json())
-      .then(result => setGetArticle(result.writing[0]));
+      .then(res => res.json())
+      .then(data => setGetArticle(data.writing[0]));
   }, [writing_id]);
 
   const {
@@ -28,18 +28,19 @@ const Article = () => {
     header_image,
     color,
   } = getArticle;
-  console.log(getArticle);
+
   //추천글 mockdata 내용 가져오기
   const [getRecommend, setGetRecommend] = useState([]);
 
   useEffect(() => {
     fetch('/data/recommend.json')
-      .then(response => response.json())
-      .then(result => setGetRecommend(result));
+      .then(res => res.json())
+      .then(data => setGetRecommend(data));
   }, []);
 
   //작가 구독하기
   const [isSubscribe, setIsSubscribe] = useState(false);
+
   const handleSubscribe = () => {
     setIsSubscribe(prev => !prev);
     let copy = { ...getArticle };
@@ -54,13 +55,13 @@ const Article = () => {
 
   //구독하기 정보 BE로 전달
   const subscribe = useEffect(() => {
-    fetch(`http://10.58.52.137:3000/likes/authors/${author_id}`, {
+    fetch(`${BASE_URL}/likes/authors/${author_id}`, {
       method: 'POST',
       headers: {
         'content-Type': 'application/json;charset=utf-8',
         Authorization: localStorage.getItem('token'),
       },
-    }).then(response => response.json());
+    }).then(res => res.json());
   }, [isSubscribe, author_id]);
 
   //글 좋아요
@@ -79,29 +80,28 @@ const Article = () => {
 
   //글 좋아요 정보 BE로 전달
   const likeArticle = useEffect(() => {
-    fetch(`http://10.58.52.137:3000/likes/writings/${id}`, {
+    fetch(`${BASE_URL}/likes/writings/${id}`, {
       method: 'POST',
       headers: {
         'content-Type': 'application/json;charset=utf-8',
         Authorization: localStorage.getItem('token'),
       },
-    }).then(response => response.json());
+    }).then(res => res.json());
   }, [isActive, id]);
 
   //장바구니로 데이터 보내기
-
   const sendItem = () => {
-    fetch('http://10.58.52.137:3000/carts', {
+    fetch(`${BASE_URL}/carts`, {
       method: 'POST',
       headers: {
         'content-Type': 'application/json;charset=utf-8',
         Authorization: localStorage.getItem('token'),
       },
       body: JSON.stringify({
-        writing_id: id,
+        writing_id: writing_id,
       }),
     })
-      .then(response => response.json())
+      .then(res => res.json())
       .then(data => {
         naviCart('/cart');
       });
@@ -174,6 +174,7 @@ const Article = () => {
     </>
   );
 };
+
 const Color = styled.div`
   position: absolute;
   width: 100%;

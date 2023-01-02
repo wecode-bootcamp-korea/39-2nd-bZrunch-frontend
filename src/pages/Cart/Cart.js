@@ -4,12 +4,8 @@ import styled from 'styled-components';
 import { RiDeleteBinLine } from 'react-icons/ri';
 
 const Cart = () => {
-  const token = localStorage.getItem('token');
   const [cartDatas, setCartDatas] = useState([]);
-
-  const totalPrice = cartDatas
-    .map(cartData => cartData.price)
-    .reduce((a, b) => a + b, 0);
+  const token = localStorage.getItem('token');
 
   const getCartData = () => {
     fetch(`${BASE_URL}/carts`, {
@@ -21,6 +17,10 @@ const Cart = () => {
       .then(res => res.json())
       .then(data => setCartDatas(data.result));
   };
+
+  const totalPrice = cartDatas
+    .map(cartData => cartData.price)
+    .reduce((a, b) => a + b, 0);
 
   // 개별 삭제버튼
   const deleteAriticle = id => {
@@ -40,7 +40,6 @@ const Cart = () => {
 
   // 카카오페이 결제
   const APP_ADMIN_KEY = process.env.REACT_APP_ADMIN_KEY;
-
   const goToPay = () => {
     fetch('https://kapi.kakao.com/v1/payment/ready', {
       method: 'POST',
@@ -79,7 +78,7 @@ const Cart = () => {
       </HeadContent>
       <Main>
         {cartDatas.length === 0 ? (
-          <ZeroContent>장바구니 비움..</ZeroContent>
+          <ZeroContent>장바구니가 비었습니다!</ZeroContent>
         ) : (
           <CartMainWrapper>
             {cartDatas.length &&

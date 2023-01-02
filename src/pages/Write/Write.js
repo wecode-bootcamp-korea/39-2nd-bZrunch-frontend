@@ -112,7 +112,7 @@ const Write = () => {
 
   useEffect(() => {
     fetch(`${BASE_URL}/writings/colors`)
-      .then(response => response.json())
+      .then(res => res.json())
       .then(data => setSelectColor(data.result));
   }, []);
 
@@ -150,7 +150,6 @@ const Write = () => {
             modules={[Pagination, Navigation]}
             className="mySwiper"
             selectColor={selectColor}
-            // onProgress={() => onClickColor(selectColor.id)}
           >
             {selectColor?.map(item => {
               return (

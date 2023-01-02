@@ -15,9 +15,10 @@ const Search = () => {
     setSearchParams(searchParams);
 
     fetch(`${BASE_URL}/writings/search?${searchParams.toString()}`)
-      .then(response => response.json())
+      .then(res => res.json())
       .then(data => setGetData(data.result));
   }, [searchParams, searchWord, setSearchParams]);
+
   return (
     <>
       <Inputall>
