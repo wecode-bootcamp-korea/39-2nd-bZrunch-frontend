@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { BASE_URL } from '../../config';
 import styled from 'styled-components';
 
 const KakaoPay = () => {
@@ -18,7 +19,7 @@ const KakaoPay = () => {
     navigate('/mypage');
   };
 
-  fetch('http://10.58.52.136:3000/payment/approval', {
+  fetch(`${BASE_URL}/payment/approval`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

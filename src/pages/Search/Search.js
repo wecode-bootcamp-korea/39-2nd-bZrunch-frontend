@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { BASE_URL } from '../../config';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { Link, useSearchParams } from 'react-router-dom';
 
@@ -13,10 +14,11 @@ const Search = () => {
     searchParams.set('searchWord', searchWord);
     setSearchParams(searchParams);
 
-    fetch(`http://10.58.52.137:3000/writings/search?${searchParams.toString()}`)
-      .then(response => response.json())
+    fetch(`${BASE_URL}/writings/search?${searchParams.toString()}`)
+      .then(res => res.json())
       .then(data => setGetData(data.result));
   }, [searchParams, searchWord, setSearchParams]);
+
   return (
     <>
       <Inputall>
@@ -82,6 +84,7 @@ const Search = () => {
     </>
   );
 };
+
 const Introduce = styled.h1`
   font-size: 30px;
   font-weight: 300;
@@ -118,47 +121,48 @@ const Team = styled.div`
 const Name = styled.span`
   font-weight: 300;
 `;
+
 const Comment = styled.span`
   width: 180px;
+  margin-top: 5px;
   font-size: 12px;
   font-weight: 300;
-  margin-top: 5px;
 `;
 
 const Wrap = styled(Link)`
   display: flex;
   flex-direction: column;
-  text-decoration: none;
   color: black;
+  text-decoration: none;
 `;
 
 const Profile = styled.img`
-  border: 1px solid #dbdbdb;
-  border-radius: 50%;
   width: 120px;
   height: 120px;
   margin: 20px auto;
+  border: 1px solid #dbdbdb;
+  border-radius: 50%;
 `;
 
 const Inputall = styled.div`
-  border-bottom: 1px solid black;
-  width: 900px;
   position: relative;
+  width: 900px;
   margin: 150px auto 20px;
+  border-bottom: 1px solid black;
 `;
 
 const SearchIcon = styled(AiOutlineSearch)`
-  font-size: 30px;
   position: absolute;
   right: 0px;
+  font-size: 30px;
 `;
 
 const InputBox = styled.input`
+  padding-bottom: 5px;
+  width: 850px;
   border: none;
   font-size: 30px;
   font-weight: 200;
-  padding-bottom: 5px;
-  width: 850px;
 
   :focus {
     outline: none;
@@ -166,12 +170,13 @@ const InputBox = styled.input`
 `;
 
 const Contents = styled.div`
-  width: 900px;
-  margin: 10px auto;
   display: flex;
+  width: 900px;
+  margin: 10px auto 450px 0;
   font-size: 14px;
   color: #959595;
-  margin-bottom: 450px;
+  animation: fadeInDown 3s;
+
   @keyframes fadeInDown {
     0% {
       opacity: 0;
@@ -182,7 +187,6 @@ const Contents = styled.div`
       transform: translateZ(0);
     }
   }
-  animation: fadeInDown 3s;
 `;
 
 const ArticleList = styled.div`

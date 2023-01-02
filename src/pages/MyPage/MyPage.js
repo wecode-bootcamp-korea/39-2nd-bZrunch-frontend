@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { BASE_URL } from '../../config';
 import styled from 'styled-components';
 import FourArticleBox from './FourArticleBox/FourArticleBox';
 
@@ -7,12 +8,9 @@ const MyPage = () => {
   const [myInfo, setMyInfo] = useState([]);
   const [myLikes, setMyLikes] = useState([]);
   const [myWritings, setMyWritings] = useState([]);
-  const [myPurchase, setMyPurchase] = useState([]);
-  const [searchParams, setSearchParams] = useSearchParams();
-  const limit = searchParams.get('limit');
 
   useEffect(() => {
-    fetch('http://10.58.52.137:3000/mypage', {
+    fetch(`${BASE_URL}/mypage`, {
       method: 'GET',
       headers: {
         'content-Type': 'application/json;charset=utf-8',
@@ -26,7 +24,7 @@ const MyPage = () => {
   }, []);
 
   useEffect(() => {
-    fetch('http://10.58.52.137:3000/mypage/mylikes', {
+    fetch(`${BASE_URL}/mypage/mylikes`, {
       method: 'GET',
       headers: {
         'content-Type': 'application/json;charset=utf-8',
@@ -40,7 +38,7 @@ const MyPage = () => {
   }, []);
 
   useEffect(() => {
-    fetch('http://10.58.52.137:3000/mypage/mywritings', {
+    fetch(`${BASE_URL}/mypage/mywritings`, {
       method: 'GET',
       headers: {
         'content-Type': 'application/json;charset=utf-8',
@@ -48,8 +46,8 @@ const MyPage = () => {
       },
     })
       .then(response => response.json())
-      .then(result => {
-        setMyWritings(result.result);
+      .then(data => {
+        setMyWritings(data.result);
       });
   }, []);
 
@@ -92,20 +90,20 @@ const MyPage = () => {
 };
 
 const Header = styled.header`
-  background-color: ${props => props.theme.theme.gray};
   height: 300px;
   position: relative;
+  background-color: ${props => props.theme.theme.gray};
 `;
 
 const Profile = styled.img`
   position: absolute;
-  border: 1px solid #dbdbdb;
-  border-radius: 50%;
+  top: 240px;
+  right: 170px;
   width: 100px;
   height: 100px;
   margin: 10px;
-  top: 240px;
-  right: 170px;
+  border: 1px solid #dbdbdb;
+  border-radius: 50%;
 `;
 
 const Mypage = styled.div`
@@ -125,9 +123,9 @@ const Name = styled.h1`
 `;
 
 const Text = styled.div`
-  font-size: 14px;
   margin: 10px 0;
   color: #acacac;
+  font-size: 14px;
   font-weight: 300;
 `;
 

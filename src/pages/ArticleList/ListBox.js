@@ -8,6 +8,7 @@ const ListBox = ({ priceList }) => {
   const goToArticle = id => {
     navigate(`/article/${id}`);
   };
+
   return (
     <WrapContent>
       {priceList.map(data => {
@@ -88,11 +89,11 @@ const SubArticle = styled.span`
 `;
 
 const SubContentSpan = styled.span`
-  color: ${props => props.theme.theme.lightGray};
   display: flex;
+  margin-top: 55px;
+  color: ${props => props.theme.theme.lightGray};
   font-size: 15px;
   overflow: hidden;
-  margin-top: 55px;
 `;
 
 const SpanText = styled.span`
@@ -108,12 +109,12 @@ const SpanTextBy = styled.span`
 const SpanNum = styled.span``;
 
 const IconDot = styled.img`
+  display: inline-block;
   width: 2px;
   height: 2px;
-  background-color: ${props => props.theme.theme.lightGray};
   margin: 5px;
+  background-color: ${props => props.theme.theme.lightGray};
   vertical-align: top;
-  display: inline-block;
 `;
 
 const ItemImg = styled.img`

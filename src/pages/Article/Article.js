@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from 'react';
+import { BASE_URL } from '../../config';
 import styled from 'styled-components';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
 const Article = () => {
   //article 내용 가져오기
-  const [getArticle, setGetArticle] = useState({});
-  const { writing_id } = useParams();
   const naviCart = useNavigate();
+  const { writing_id } = useParams();
+  const [getArticle, setGetArticle] = useState({});
 
   useEffect(() => {
-    fetch(`http://10.58.52.137:3000/writings/${writing_id}`)
-      .then(response => response.json())
-      .then(result => setGetArticle(result.writing[0]));
+    fetch(`${BASE_URL}/writings/${writing_id}`)
+      .then(res => res.json())
+      .then(data => setGetArticle(data.writing[0]));
   }, [writing_id]);
 
   const {
@@ -27,18 +28,19 @@ const Article = () => {
     header_image,
     color,
   } = getArticle;
-  console.log(getArticle);
+
   //추천글 mockdata 내용 가져오기
   const [getRecommend, setGetRecommend] = useState([]);
 
   useEffect(() => {
     fetch('/data/recommend.json')
-      .then(response => response.json())
-      .then(result => setGetRecommend(result));
+      .then(res => res.json())
+      .then(data => setGetRecommend(data));
   }, []);
 
   //작가 구독하기
   const [isSubscribe, setIsSubscribe] = useState(false);
+
   const handleSubscribe = () => {
     setIsSubscribe(prev => !prev);
     let copy = { ...getArticle };
@@ -53,17 +55,18 @@ const Article = () => {
 
   //구독하기 정보 BE로 전달
   const subscribe = useEffect(() => {
-    fetch(`http://10.58.52.137:3000/likes/authors/${author_id}`, {
+    fetch(`${BASE_URL}/likes/authors/${author_id}`, {
       method: 'POST',
       headers: {
         'content-Type': 'application/json;charset=utf-8',
         Authorization: localStorage.getItem('token'),
       },
-    }).then(response => response.json());
+    }).then(res => res.json());
   }, [isSubscribe, author_id]);
 
   //글 좋아요
   const [isActive, setIsActive] = useState(false);
+
   const handleLike = () => {
     setIsActive(prev => !prev);
     let copy = { ...getArticle };
@@ -78,29 +81,28 @@ const Article = () => {
 
   //글 좋아요 정보 BE로 전달
   const likeArticle = useEffect(() => {
-    fetch(`http://10.58.52.137:3000/likes/writings/${id}`, {
+    fetch(`${BASE_URL}/likes/writings/${id}`, {
       method: 'POST',
       headers: {
         'content-Type': 'application/json;charset=utf-8',
         Authorization: localStorage.getItem('token'),
       },
-    }).then(response => response.json());
+    }).then(res => res.json());
   }, [isActive, id]);
 
   //장바구니로 데이터 보내기
-
   const sendItem = () => {
-    fetch('http://10.58.52.137:3000/carts', {
+    fetch(`${BASE_URL}/carts`, {
       method: 'POST',
       headers: {
         'content-Type': 'application/json;charset=utf-8',
         Authorization: localStorage.getItem('token'),
       },
       body: JSON.stringify({
-        writing_id: id,
+        writing_id: writing_id,
       }),
     })
-      .then(response => response.json())
+      .then(res => res.json())
       .then(data => {
         naviCart('/cart');
       });
@@ -173,6 +175,7 @@ const Article = () => {
     </>
   );
 };
+
 const Color = styled.div`
   position: absolute;
   width: 100%;
@@ -190,8 +193,6 @@ const BackImg = styled.img`
   width: 100%;
   height: 100%;
 `;
-
-const BuyLink = styled(Link)``;
 
 const Buttonwrap = styled.div`
   text-align: center;
@@ -212,51 +213,51 @@ const Box = styled(Link)`
 
 const RecTitle = styled.h1`
   width: 100%;
+  margin-top: 30px;
   font-size: 25px;
   font-weight: 300;
-  margin-top: 30px;
 `;
 
 const RecContents = styled.h1`
   width: 100%;
+  margin-top: 15px;
   font-size: 14px;
   font-weight: 300;
-  margin-top: 15px;
 `;
 
 const Recommend = styled.div`
   display: flex;
+  justify-content: space-around;
   flex-wrap: wrap;
   margin: 50px 80px;
-  justify-content: space-around;
 `;
 
 const Header = styled.header`
-  border-bottom: 1px solid black;
-  height: 600px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
+  height: 600px;
+  border-bottom: 1px solid black;
 `;
 
 const Title = styled.h1`
+  position: fixed;
+  width: 700px;
+  padding: 100px 0;
   font-family: 'Nanum Myeongjo', serif;
   font-size: 45px;
-  padding: 100px 0;
-  width: 700px;
-  position: fixed;
 `;
 
 const Writer = styled.p`
+  display: flex;
+  align-items: center;
+  position: fixed;
+  width: 700px;
+  padding: 30px 0;
   font-size: 12px;
   font-family: 'Nanum Myeongjo', serif;
   font-weight: bolder;
-  display: flex;
-  align-items: center;
-  width: 700px;
-  position: fixed;
-  padding: 30px 0;
 `;
 
 const Icon = styled(AiOutlineHeart)`
@@ -268,32 +269,32 @@ const Icon = styled(AiOutlineHeart)`
 const ClickedIcon = styled(AiFillHeart)`
   margin-left: 20px;
   font-size: 30px;
-  cursor: pointer;
   color: ${props => props.theme.theme.mint};
+  cursor: pointer;
 `;
 
 const Likes = styled.span``;
 
 const BodyContents = styled.div`
-  font-family: 'Noto Sans KR', sans-serif;
   margin: 0 auto;
-  padding-top: 30px;
   width: 700px;
+  padding-top: 30px;
   font-size: 25px;
+  font-family: 'Noto Sans KR', sans-serif;
 `;
 
 const Body = styled.div`
-  background-color: white;
-  height: 500px;
   position: relative;
+  height: 500px;
+  background-color: white;
   z-index: 1;
 `;
 
 const Footer = styled.div`
-  background-color: ${props => props.theme.theme.gray};
   position: relative;
   height: 1000px;
   padding-top: 20px;
+  background-color: ${props => props.theme.theme.gray};
   @media only screen and (max-width: 1180px) {
     height: 1300px;
   }
@@ -303,35 +304,35 @@ const Footer = styled.div`
 `;
 
 const Profile = styled.img`
-  border: 1px solid #dbdbdb;
-  border-radius: 50%;
-  width: 100px;
-  height: 100px;
-  margin: 10px;
   position: absolute;
   right: 150px;
   top: -30px;
+  width: 100px;
+  height: 100px;
+  margin: 10px;
+  border: 1px solid #dbdbdb;
+  border-radius: 50%;
   z-index: 2;
 `;
 
 const Button = styled.button`
   width: 80px;
   height: 30px;
-  border-radius: 15px;
+  margin-left: 20px;
   color: ${props => props.theme.theme.mint};
   border: 1px solid ${props => props.theme.theme.mint};
+  border-radius: 15px;
   background-color: white;
-  margin-left: 20px;
   cursor: pointer;
 `;
 
 const BuyButton = styled.button`
   width: 120px;
   height: 45px;
-  border-radius: 22.5px;
   margin: 0 20px;
-  color: ${props => props.theme.theme.mint};
   border: 1px solid ${props => props.theme.theme.mint};
+  border-radius: 22.5px;
+  color: ${props => props.theme.theme.mint};
   background-color: white;
   cursor: pointer;
 `;
@@ -339,19 +340,19 @@ const BuyButton = styled.button`
 const ClickedBtn = styled.button`
   width: 80px;
   height: 30px;
-  border-radius: 15px;
-  color: white;
-  border: 1px solid ${props => props.theme.theme.mint};
-  background-color: ${props => props.theme.theme.mint};
   margin-left: 20px;
+  border: 1px solid ${props => props.theme.theme.mint};
+  border-radius: 15px;
+  background-color: ${props => props.theme.theme.mint};
+  color: white;
   cursor: pointer;
 `;
 
 const Contents = styled.div`
-  font-family: 'Noto Sans KR', sans-serif;
-  font-size: 28px;
   margin: 30px auto;
   width: 700px;
+  font-size: 28px;
+  font-family: 'Noto Sans KR', sans-serif;
 `;
 
 const Follower = styled.div`

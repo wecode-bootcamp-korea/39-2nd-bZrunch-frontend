@@ -1,5 +1,6 @@
 import React from 'react';
-import { useNavigate, useLocation, useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { BASE_URL } from '../../config';
 
 const KakaoLogin = () => {
   const navigate = useNavigate();
@@ -7,7 +8,7 @@ const KakaoLogin = () => {
   const KAKAO_CODE = searchParams.get('code');
 
   // 카카오 인가코드 백엔드에게 전송
-  fetch('http://10.58.52.137:3000/auth/signin', {
+  fetch(`${BASE_URL}/auth/signin`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',

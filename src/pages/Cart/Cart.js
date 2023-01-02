@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import { BASE_URL } from '../../config';
 import styled from 'styled-components';
 import { RiDeleteBinLine } from 'react-icons/ri';
 
 const Cart = () => {
-  const token = localStorage.getItem('token');
   const [cartDatas, setCartDatas] = useState([]);
-
-  const totalPrice = cartDatas
-    .map(cartData => cartData.price)
-    .reduce((a, b) => a + b, 0);
+  const token = localStorage.getItem('token');
 
   const getCartData = () => {
-    fetch('http://10.58.52.137:3000/carts', {
+    fetch(`${BASE_URL}/carts`, {
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
         authorization: token,
@@ -21,9 +18,13 @@ const Cart = () => {
       .then(data => setCartDatas(data.result));
   };
 
+  const totalPrice = cartDatas
+    .map(cartData => cartData.price)
+    .reduce((a, b) => a + b, 0);
+
   // 개별 삭제버튼
   const deleteAriticle = id => {
-    fetch('http://10.58.52.137:3000/carts', {
+    fetch(`${BASE_URL}/carts`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -78,7 +79,7 @@ const Cart = () => {
       </HeadContent>
       <Main>
         {cartDatas.length === 0 ? (
-          <ZeroContent>장바구니 비움..</ZeroContent>
+          <ZeroContent>장바구니가 비었습니다!</ZeroContent>
         ) : (
           <CartMainWrapper>
             {cartDatas.length &&

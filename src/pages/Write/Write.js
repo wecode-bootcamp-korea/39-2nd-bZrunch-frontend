@@ -5,6 +5,7 @@ import { CiImageOn } from 'react-icons/ci';
 import { VscSymbolColor } from 'react-icons/vsc';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Navigation } from 'swiper';
+import { BASE_URL } from '../../config';
 import AWS from 'aws-sdk';
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -82,7 +83,7 @@ const Write = () => {
   };
 
   const postData = imgSrc => {
-    fetch('http://10.58.52.137:3000/writings', {
+    fetch(`${BASE_URL}:3000/writings`, {
       method: 'POST',
       headers: {
         'content-Type': 'application/json;charset=utf-8',
@@ -110,8 +111,8 @@ const Write = () => {
   };
 
   useEffect(() => {
-    fetch('http://10.58.52.137:3000/writings/colors')
-      .then(response => response.json())
+    fetch(`${BASE_URL}/writings/colors`)
+      .then(res => res.json())
       .then(data => setSelectColor(data.result));
   }, []);
 
@@ -149,7 +150,6 @@ const Write = () => {
             modules={[Pagination, Navigation]}
             className="mySwiper"
             selectColor={selectColor}
-            // onProgress={() => onClickColor(selectColor.id)}
           >
             {selectColor?.map(item => {
               return (

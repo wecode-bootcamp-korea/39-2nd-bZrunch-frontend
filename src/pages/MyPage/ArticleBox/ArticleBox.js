@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 function ArticleBox({ data }) {
-  console.log(data);
   return (
     <Articlebox>
       <Content to={`/article/${data.id}`}>
