@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { BASE_URL } from '../../config';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { Link, useSearchParams } from 'react-router-dom';
 
@@ -13,7 +14,7 @@ const Search = () => {
     searchParams.set('searchWord', searchWord);
     setSearchParams(searchParams);
 
-    fetch(`http://10.58.52.137:3000/writings/search?${searchParams.toString()}`)
+    fetch(`${BASE_URL}/writings/search?${searchParams.toString()}`)
       .then(response => response.json())
       .then(data => setGetData(data.result));
   }, [searchParams, searchWord, setSearchParams]);

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { BASE_URL } from '../../config';
 import styled from 'styled-components';
 import { RiDeleteBinLine } from 'react-icons/ri';
 
@@ -11,7 +12,7 @@ const Cart = () => {
     .reduce((a, b) => a + b, 0);
 
   const getCartData = () => {
-    fetch('http://10.58.52.137:3000/carts', {
+    fetch(`${BASE_URL}/carts`, {
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
         authorization: token,
@@ -23,7 +24,7 @@ const Cart = () => {
 
   // 개별 삭제버튼
   const deleteAriticle = id => {
-    fetch('http://10.58.52.137:3000/carts', {
+    fetch(`${BASE_URL}/carts`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',

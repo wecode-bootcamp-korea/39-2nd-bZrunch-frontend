@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Slider from 'react-slick';
 import styled from 'styled-components';
+import { BASE_URL } from '../../config';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
@@ -14,7 +15,7 @@ const MainSlide = () => {
   };
 
   useEffect(() => {
-    fetch('http://10.58.52.137:3000/main/list')
+    fetch(`${BASE_URL}/main/list`)
       .then(res => res.json())
       .then(data => setSlideDatas(data.result.writing));
   }, []);

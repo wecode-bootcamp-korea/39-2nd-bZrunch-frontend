@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { BASE_URL } from '../../config';
 import styled from 'styled-components';
 
 const KeywordList = () => {
@@ -11,7 +12,7 @@ const KeywordList = () => {
   };
 
   useEffect(() => {
-    fetch('http://10.58.52.137:3000/main/list')
+    fetch(`${BASE_URL}/main/list`)
       .then(res => res.json())
       .then(data => setCategoryDatas(data.result.category));
   }, []);

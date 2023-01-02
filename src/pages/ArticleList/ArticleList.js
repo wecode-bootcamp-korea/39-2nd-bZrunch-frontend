@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
+import { BASE_URL } from '../../config';
 import styled from 'styled-components';
 import ListBox from './ListBox';
 
@@ -22,9 +23,7 @@ const ArticleList = () => {
   };
 
   useEffect(() => {
-    fetch(
-      `http://10.58.52.137:3000/writings?cate_id=${cate_id}&${searchParams.toString()}`
-    )
+    fetch(`${BASE_URL}/writings?cate_id=${cate_id}&${searchParams.toString()}`)
       .then(res => res.json())
       .then(data => setPriceList(data.result));
   }, [searchParams]);

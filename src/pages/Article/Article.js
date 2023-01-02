@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { BASE_URL } from '../../config';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
 const Article = () => {
   //article 내용 가져오기
-  const [getArticle, setGetArticle] = useState({});
   const { writing_id } = useParams();
   const naviCart = useNavigate();
+  const [getArticle, setGetArticle] = useState({});
 
   useEffect(() => {
-    fetch(`http://10.58.52.137:3000/writings/${writing_id}`)
+    fetch(`${BASE_URL}/writings/${writing_id}`)
       .then(response => response.json())
       .then(result => setGetArticle(result.writing[0]));
   }, [writing_id]);

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
+import { BASE_URL } from '../../config';
 import styled from 'styled-components';
 import FourArticleBox from './FourArticleBox/FourArticleBox';
 
@@ -12,7 +13,7 @@ const MyPage = () => {
   const limit = searchParams.get('limit');
 
   useEffect(() => {
-    fetch('http://10.58.52.137:3000/mypage', {
+    fetch(`${BASE_URL}/mypage`, {
       method: 'GET',
       headers: {
         'content-Type': 'application/json;charset=utf-8',
@@ -26,7 +27,7 @@ const MyPage = () => {
   }, []);
 
   useEffect(() => {
-    fetch('http://10.58.52.137:3000/mypage/mylikes', {
+    fetch(`${BASE_URL}/mypage/mylikes`, {
       method: 'GET',
       headers: {
         'content-Type': 'application/json;charset=utf-8',
@@ -40,7 +41,7 @@ const MyPage = () => {
   }, []);
 
   useEffect(() => {
-    fetch('http://10.58.52.137:3000/mypage/mywritings', {
+    fetch(`${BASE_URL}0/mypage/mywritings`, {
       method: 'GET',
       headers: {
         'content-Type': 'application/json;charset=utf-8',
