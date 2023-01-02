@@ -60,8 +60,8 @@ const HamburgerMenu = styled(RxHamburgerMenu)`
 const Brunch = styled(Link)`
   display: inline;
   padding-left: 15px;
-  font-family: 'Caveat', cursive;
   font-size: 25px;
+  font-family: 'Caveat', cursive;
   text-decoration: none;
 
   &:visited {
@@ -80,9 +80,9 @@ const LoginLink = styled(Link)`
   padding: 7px 10px;
   border: 1px solid ${props => props.theme.theme.lightGray};
   border-radius: 20px;
+  font-size: 10px;
   background-color: transparent;
   color: ${props => props.theme.theme.lightGray};
-  font-size: 10px;
   text-decoration: none;
   cursor: pointer;
 

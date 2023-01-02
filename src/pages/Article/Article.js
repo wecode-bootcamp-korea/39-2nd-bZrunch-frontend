@@ -66,6 +66,7 @@ const Article = () => {
 
   //글 좋아요
   const [isActive, setIsActive] = useState(false);
+
   const handleLike = () => {
     setIsActive(prev => !prev);
     let copy = { ...getArticle };
@@ -193,8 +194,6 @@ const BackImg = styled.img`
   height: 100%;
 `;
 
-const BuyLink = styled(Link)``;
-
 const Buttonwrap = styled.div`
   text-align: center;
 `;
@@ -214,51 +213,51 @@ const Box = styled(Link)`
 
 const RecTitle = styled.h1`
   width: 100%;
+  margin-top: 30px;
   font-size: 25px;
   font-weight: 300;
-  margin-top: 30px;
 `;
 
 const RecContents = styled.h1`
   width: 100%;
+  margin-top: 15px;
   font-size: 14px;
   font-weight: 300;
-  margin-top: 15px;
 `;
 
 const Recommend = styled.div`
   display: flex;
+  justify-content: space-around;
   flex-wrap: wrap;
   margin: 50px 80px;
-  justify-content: space-around;
 `;
 
 const Header = styled.header`
-  border-bottom: 1px solid black;
-  height: 600px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
+  height: 600px;
+  border-bottom: 1px solid black;
 `;
 
 const Title = styled.h1`
+  position: fixed;
+  width: 700px;
+  padding: 100px 0;
   font-family: 'Nanum Myeongjo', serif;
   font-size: 45px;
-  padding: 100px 0;
-  width: 700px;
-  position: fixed;
 `;
 
 const Writer = styled.p`
+  display: flex;
+  align-items: center;
+  position: fixed;
+  width: 700px;
+  padding: 30px 0;
   font-size: 12px;
   font-family: 'Nanum Myeongjo', serif;
   font-weight: bolder;
-  display: flex;
-  align-items: center;
-  width: 700px;
-  position: fixed;
-  padding: 30px 0;
 `;
 
 const Icon = styled(AiOutlineHeart)`
@@ -270,32 +269,32 @@ const Icon = styled(AiOutlineHeart)`
 const ClickedIcon = styled(AiFillHeart)`
   margin-left: 20px;
   font-size: 30px;
-  cursor: pointer;
   color: ${props => props.theme.theme.mint};
+  cursor: pointer;
 `;
 
 const Likes = styled.span``;
 
 const BodyContents = styled.div`
-  font-family: 'Noto Sans KR', sans-serif;
   margin: 0 auto;
-  padding-top: 30px;
   width: 700px;
+  padding-top: 30px;
   font-size: 25px;
+  font-family: 'Noto Sans KR', sans-serif;
 `;
 
 const Body = styled.div`
-  background-color: white;
-  height: 500px;
   position: relative;
+  height: 500px;
+  background-color: white;
   z-index: 1;
 `;
 
 const Footer = styled.div`
-  background-color: ${props => props.theme.theme.gray};
   position: relative;
   height: 1000px;
   padding-top: 20px;
+  background-color: ${props => props.theme.theme.gray};
   @media only screen and (max-width: 1180px) {
     height: 1300px;
   }
@@ -305,35 +304,35 @@ const Footer = styled.div`
 `;
 
 const Profile = styled.img`
-  border: 1px solid #dbdbdb;
-  border-radius: 50%;
-  width: 100px;
-  height: 100px;
-  margin: 10px;
   position: absolute;
   right: 150px;
   top: -30px;
+  width: 100px;
+  height: 100px;
+  margin: 10px;
+  border: 1px solid #dbdbdb;
+  border-radius: 50%;
   z-index: 2;
 `;
 
 const Button = styled.button`
   width: 80px;
   height: 30px;
-  border-radius: 15px;
+  margin-left: 20px;
   color: ${props => props.theme.theme.mint};
   border: 1px solid ${props => props.theme.theme.mint};
+  border-radius: 15px;
   background-color: white;
-  margin-left: 20px;
   cursor: pointer;
 `;
 
 const BuyButton = styled.button`
   width: 120px;
   height: 45px;
-  border-radius: 22.5px;
   margin: 0 20px;
-  color: ${props => props.theme.theme.mint};
   border: 1px solid ${props => props.theme.theme.mint};
+  border-radius: 22.5px;
+  color: ${props => props.theme.theme.mint};
   background-color: white;
   cursor: pointer;
 `;
@@ -341,19 +340,19 @@ const BuyButton = styled.button`
 const ClickedBtn = styled.button`
   width: 80px;
   height: 30px;
-  border-radius: 15px;
-  color: white;
-  border: 1px solid ${props => props.theme.theme.mint};
-  background-color: ${props => props.theme.theme.mint};
   margin-left: 20px;
+  border: 1px solid ${props => props.theme.theme.mint};
+  border-radius: 15px;
+  background-color: ${props => props.theme.theme.mint};
+  color: white;
   cursor: pointer;
 `;
 
 const Contents = styled.div`
-  font-family: 'Noto Sans KR', sans-serif;
-  font-size: 28px;
   margin: 30px auto;
   width: 700px;
+  font-size: 28px;
+  font-family: 'Noto Sans KR', sans-serif;
 `;
 
 const Follower = styled.div`

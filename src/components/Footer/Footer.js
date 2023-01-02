@@ -45,19 +45,18 @@ const FooterWrapper = styled.div`
 `;
 
 const InnerFoot = styled.div`
-  padding-top: 30px;
-  padding-bottom: 30px;
+  padding: 30px 0;
 `;
 
 const WrapInfo = styled.div`
-  margin-bottom: 30px;
   display: flex;
   justify-content: space-between;
+  margin-bottom: 30px;
 `;
 
 const LeftArea = styled.div`
-  padding-left: 90px;
   float: left;
+  padding-left: 90px;
   width: 350px;
 `;
 
@@ -85,55 +84,54 @@ const LeftTextSub = styled.div`
 `;
 
 const MiddleWrapper1 = styled.div`
-  margin-left: 50px;
-  width: 300px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  margin-left: 50px;
+  width: 300px;
 `;
 
 const MiddleWrapper2 = styled.div`
-  width: 300px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 300px;
 `;
 
 const MiddleLi = styled.li`
   color: white;
-  list-style: none;
   font-weight: bold;
   font-family: 'Noto Sans KR', sans-serif;
+  list-style: none;
 `;
 
 const RightWrapper = styled.div`
-  padding-right: 90px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  padding-right: 90px;
 `;
 
 const RightLi = styled.li`
   color: white;
-  list-style: none;
   font-weight: bold;
   font-family: 'Noto Sans KR', sans-serif;
+  list-style: none;
 `;
 
 const BottomWrapper = styled.div`
-  border-top: 0.5px solid lightgray;
-  height: 100px;
   display: flex;
   justify-content: space-between;
-  padding-left: 90px;
-  padding-right: 90px;
+  padding: 0 90px;
+  height: 100px;
+  border-top: 0.5px solid lightgray;
 `;
 
 const BottomLeft = styled.div`
-  color: white;
-  font-family: 'Noto Sans KR', sans-serif;
-  font-size: 20px;
   margin-top: 30px;
+  color: white;
+  font-size: 20px;
+  font-family: 'Noto Sans KR', sans-serif;
 `;
 
 const BottomRight = styled.a`
@@ -141,10 +139,10 @@ const BottomRight = styled.a`
 `;
 
 const Git = styled(AiFillGithub)`
-  cursor: pointer;
   width: 40px;
   height: 40px;
   color: white;
+  cursor: pointer;
 `;
 
 export default Footer;

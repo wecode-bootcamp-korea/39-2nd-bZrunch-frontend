@@ -40,6 +40,7 @@ const Cart = () => {
 
   // 카카오페이 결제
   const APP_ADMIN_KEY = process.env.REACT_APP_ADMIN_KEY;
+
   const goToPay = () => {
     fetch('https://kapi.kakao.com/v1/payment/ready', {
       method: 'POST',

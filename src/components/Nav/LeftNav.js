@@ -101,8 +101,8 @@ const ProfileImg = styled.img`
 
 const Logo = styled(Link)`
   padding-top: 50px;
-  font-family: 'Caveat', cursive;
   font-size: 30px;
+  font-family: 'Caveat', cursive;
   text-decoration: none;
 
   &:visited {
@@ -126,8 +126,8 @@ const NameTitle = styled.div`
 
 const Name = styled.div`
   margin-right: 5px;
-  font-weight: bold;
   color: ${props => props.theme.theme.black};
+  font-weight: bold;
 `;
 
 const NameWriter = styled.span`
@@ -166,8 +166,8 @@ const Main = styled.div`
   margin: 40px 0;
   background-color: white;
   color: gray;
-  font-family: 'Noto Sans KR', sans-serif;
   font-size: 15px;
+  font-family: 'Noto Sans KR', sans-serif;
   letter-spacing: -0.5px;
 `;
 
@@ -219,8 +219,8 @@ const NowLink = styled(Link)`
 
 const MyPageLink = styled(Link)`
   padding-bottom: 40px;
-  text-decoration: none;
   color: gray;
+  text-decoration: none;
 
   &:visited {
     color: inherit;
@@ -241,8 +241,8 @@ const MyPageLink = styled(Link)`
 `;
 
 const CartLink = styled(Link)`
-  text-decoration: none;
   color: gray;
+  text-decoration: none;
 
   &:visited {
     color: inherit;
@@ -268,12 +268,12 @@ const LogoutBtn = styled.button`
   left: 50%;
   margin-bottom: 20px;
   padding: 5px 10px;
+  transform: translate(-50%, -50%);
   border: 1px solid gray;
   border-radius: 20px;
   background-color: white;
   color: gray;
   font-size: 10px;
-  transform: translate(-50%, -50%);
   cursor: pointer;
 `;
 
@@ -283,8 +283,8 @@ const Forget = styled.div`
   bottom: 50px;
   left: 50%;
   margin: 0 auto;
-  color: gray;
   transform: translate(-50%, -50%);
+  color: gray;
   font-family: 'Noto Sans KR', sans-serif;
   font-size: 12px;
 `;

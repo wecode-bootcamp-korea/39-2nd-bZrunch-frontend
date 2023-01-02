@@ -90,20 +90,20 @@ const MyPage = () => {
 };
 
 const Header = styled.header`
-  background-color: ${props => props.theme.theme.gray};
   height: 300px;
   position: relative;
+  background-color: ${props => props.theme.theme.gray};
 `;
 
 const Profile = styled.img`
   position: absolute;
-  border: 1px solid #dbdbdb;
-  border-radius: 50%;
+  top: 240px;
+  right: 170px;
   width: 100px;
   height: 100px;
   margin: 10px;
-  top: 240px;
-  right: 170px;
+  border: 1px solid #dbdbdb;
+  border-radius: 50%;
 `;
 
 const Mypage = styled.div`
@@ -123,9 +123,9 @@ const Name = styled.h1`
 `;
 
 const Text = styled.div`
-  font-size: 14px;
   margin: 10px 0;
   color: #acacac;
+  font-size: 14px;
   font-weight: 300;
 `;
 

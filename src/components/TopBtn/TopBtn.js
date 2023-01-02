@@ -20,6 +20,7 @@ const TopBtn = () => {
       }
     };
     window.addEventListener('scroll', ShowBtn);
+
     return () => {
       window.removeEventListener('scroll', ShowBtn);
     };
@@ -32,10 +33,10 @@ const Top = styled.button`
   position: sticky;
   bottom: 20px;
   left: 92%;
+  padding: 5px 15px;
   border: 1px solid ${props => props.theme.theme.lightGray};
   border-radius: 20px;
   font-size: 15px;
-  padding: 5px 15px;
   background-color: transparent;
   color: gray;
   font-family: 'Times New Roman', Times, serif;
